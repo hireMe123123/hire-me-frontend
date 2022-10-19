@@ -2,3 +2,13 @@
   font-weight: bold;
   background-color: #f5f5f5;
 }
+
+.background-purple-white {
+  background: linear-gradient(
+    to bottom,
+    rgba(94, 80, 161, 1) 0%,
+    rgba(94, 80, 161, 1) 30%,
+    rgba(255, 255, 255, 1) 30%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
