@@ -16,8 +16,8 @@ export default function EditProfileCompany() {
           <div className="py-5">
             <div className="container-fluid ">
               <div className="container">
-                <div className="d-flex flex-row align-items-start">
-                  <div className="col-4 me-4">
+                <div className="d-flex flex-column flex-xxl-row align-items-start">
+                  <div className="col-12 col-xxl-4 me-xxl-4">
                     <div
                       className="py-5 border rounded rounded-3 bg-white"
                       style={{ padding: "0px 30px" }}
@@ -66,7 +66,7 @@ export default function EditProfileCompany() {
                     </div>
                   </div>
 
-                  <div className="col-8 d-flex flex-column gap-4">
+                  <div className="col-12 col-xxl-8 d-flex flex-column gap-4 mt-5 mt-xxl-0">
                     <div className="container border rounded-3 bg-white">
                       <div className="mx-4 py-5">
                         <div className="fw-semibold color-bold h4 mb-4">
