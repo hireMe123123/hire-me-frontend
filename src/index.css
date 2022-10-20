@@ -204,10 +204,9 @@ footer {
 }
 
 .last-section {
-  /* width: 1140px; */
   height: 227px;
   border-radius: 40px 8px;
-  /* background-image: url("assets/img/bg-wave.png"); */
+  background-image: url("assets/img/bg-wave.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -216,3 +215,22 @@ footer {
 footer {
   height: 401px;
 }
+
+@media screen and (max-width: 576px) {
+  .footer-contact {
+    display: none !important;
+  }
+
+  .main-landing .button-opinion {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .main-landing .section2 {
+    padding-left: 150px;
+  }
+}
+/* .main-landing {
+
+} */
