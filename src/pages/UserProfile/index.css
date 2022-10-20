@@ -12,3 +12,15 @@
     rgba(255, 255, 255, 1) 100%
   );
 }
+
+@media (max-width: 768px) {
+  .background-purple-white {
+    background: linear-gradient(
+      to bottom,
+      rgba(94, 80, 161, 1) 0%,
+      rgba(94, 80, 161, 1) 15%,
+      rgba(255, 255, 255, 1) 15%,
+      rgba(255, 255, 255, 1) 100%
+    );
+  }
+}

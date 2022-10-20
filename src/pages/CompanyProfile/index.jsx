@@ -40,7 +40,7 @@ export default function CompanyProfile() {
                     occaecat cupidatat non proident, sunt in culpa qui officia
                     deserunt mollit anim id est laborum.{" "}
                   </div>
-                  <button className="btn btn-primary w-25 mb-5">
+                  <button className="btn btn-primary w-50 mb-5">
                     Edit Profile
                   </button>
 

@@ -7,6 +7,15 @@ import Footer from "../../components/Footer";
 import "./index.css";
 
 export default function UserProfile() {
+  const portofolio = [
+    { id: 1, title: "Portofolio App 1", image: noPhoto },
+    { id: 2, title: "Portofolio App 2", image: noPhoto },
+    { id: 3, title: "Portofolio App 3", image: noPhoto },
+    // { id: 4, title: "Portofolio App 4", image: noPhoto },
+    // { id: 5, title: "Portofolio App 5", image: noPhoto },
+    // { id: 6, title: "Portofolio App 6", image: noPhoto },
+  ];
+
   return (
     <div>
       {/* Header */}
@@ -15,8 +24,8 @@ export default function UserProfile() {
         <div className="py-5">
           <div className="container-fluid ">
             <div className="container">
-              <div className="d-flex flex-row align-items-start">
-                <div className="col-4 border rounded rounded-3 me-4 bg-white">
+              <div className="d-flex flex-row flex-wrap align-items-start gap-5">
+                <div className="col-md-4 col-sm-12 border rounded rounded-3 bg-white">
                   <div className="px-4 py-5">
                     <div className="text-center mb-5">
                       <img src={noPhoto} alt="" className="w-50 rounded-pill" />
@@ -45,7 +54,7 @@ export default function UserProfile() {
                   </div>
                 </div>
 
-                <div className="container border rounded-3 bg-white">
+                <div className="col-md-7 col-sm-12 border rounded-3 bg-white">
                   <div className="px-4 py-5">
                     <ul className="nav nav-pills" id="myTab" role="tablist">
                       <li className="nav-item" role="presentation">
@@ -79,12 +88,25 @@ export default function UserProfile() {
                     </ul>
                     <div className="tab-content" id="myTabContent">
                       <div
-                        className="tab-pane fade show active mt-3"
+                        className="tab-pane fade show active mt-3 "
                         id="portofolio"
                         role="tabpanel"
                         aria-labelledby="portofolio-tab"
                       >
-                        <ListPortofolio />
+                        {/* Map listPortofolio */}
+                        <div className="row">
+                          <div className="d-flex flex-row justify-content-evenly gap-5 bg-white text-dark">
+                            {/* <div className="col-3"> */}
+                            {portofolio.map((item) => (
+                              <ListPortofolio
+                                key={item.id}
+                                title={item.title}
+                                image={item.image}
+                              />
+                            ))}
+                            {/* </div> */}
+                          </div>
+                        </div>
                       </div>
                       <div
                         className="tab-pane fade mt-3"
