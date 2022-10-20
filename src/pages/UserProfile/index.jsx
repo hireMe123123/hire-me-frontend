@@ -11,9 +11,9 @@ export default function UserProfile() {
     { id: 1, title: "Portofolio App 1", image: noPhoto },
     { id: 2, title: "Portofolio App 2", image: noPhoto },
     { id: 3, title: "Portofolio App 3", image: noPhoto },
-    // { id: 4, title: "Portofolio App 4", image: noPhoto },
-    // { id: 5, title: "Portofolio App 5", image: noPhoto },
-    // { id: 6, title: "Portofolio App 6", image: noPhoto },
+    { id: 4, title: "Portofolio App 4", image: noPhoto },
+    { id: 5, title: "Portofolio App 5", image: noPhoto },
+    { id: 6, title: "Portofolio App 6", image: noPhoto },
   ];
 
   return (
@@ -95,7 +95,7 @@ export default function UserProfile() {
                       >
                         {/* Map listPortofolio */}
                         <div className="row">
-                          <div className="d-flex flex-row justify-content-evenly gap-5 bg-white text-dark">
+                          <div className="d-flex flex-row flex-wrap justify-content-between gap-5 bg-white text-dark">
                             {/* <div className="col-3"> */}
                             {portofolio.map((item) => (
                               <ListPortofolio
