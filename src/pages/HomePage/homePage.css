@@ -86,3 +86,9 @@
     width: auto;
     display: flex;
  }
+
+ @media screen and (max-width : 567px) {
+    .home__container {
+       width: 95%;
+    }   
+ }

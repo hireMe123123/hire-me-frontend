@@ -1,50 +1,34 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-key */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./homePage.css";
 import Footer from "../../components/Footer";
 import NavbarHeader from "../../components/Navbar";
 import arrow from "../../assets/img/arrow_searchbar_home.svg";
-import Card from "../../components/Card";
 import Pagination from "../../components/Pagination";
+import axios from "../../utils/axios";
+import Card from "../../components/Card";
 
 export default function HomePage() {
   const isLogin = false;
   const [rotate, setRotate] = useState(false);
   const [dropDown, setDropDown] = useState(false);
-  const employee = [
-    {
-      name: "Rizky",
-      skill: ["Javascript", "HTML", "CSS"],
-    },
-    {
-      name: "Aziz",
-      skill: ["Javascript", "HTML", "CSS"],
-    },
-    {
-      name: "Dhohir",
-      skill: ["Javascript", "HTML", "CSS"],
-    },
-    {
-      name: "Abdul",
-      skill: ["Javascript", "HTML", "CSS"],
-    },
-    {
-      name: "Kevin",
-      skill: ["Javascript", "HTML", "CSS"],
-    },
-    {
-      name: "Rosid",
-      skill: ["Javascript", "HTML", "CSS"],
-    },
-    {
-      name: "Fahmi",
-      skill: ["Javascript", "HTML", "CSS"],
-    },
-    {
-      name: "Burhan",
-      skill: ["Javascript", "HTML", "CSS"],
-    },
-  ];
+  const [getEmployee, setGetEmployee] = useState({});
+
+  useEffect(() => {
+    getDataUser();
+  }, []);
+
+  const getDataUser = async () => {
+    try {
+      const employee = await axios.get("api/user/getalluser");
+      setGetEmployee(employee.data.data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+  console.log(getEmployee);
+
   return (
     <>
       <header>
@@ -99,8 +83,8 @@ export default function HomePage() {
             <button>Search</button>
           </div>
           <div className="main__section">
-            {employee ? (
-              employee.map((i) => <Card name={i.name} skills={i.skill} />)
+            {getEmployee.length > 0 ? (
+              getEmployee.map((i) => <Card name={i.name} />)
             ) : (
               <h1 className="w-100">Loading ..</h1>
             )}

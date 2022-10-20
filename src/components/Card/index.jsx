@@ -4,7 +4,7 @@ import "./card.css";
 import profilePic from "../../assets/img/profile_image_dummy.jpg";
 import pinLocation from "../../assets/img/pin__location__icon.svg";
 
-export default function Card({ name, skills }) {
+export default function Card(props) {
   return (
     <>
       <div className="card">
@@ -16,20 +16,21 @@ export default function Card({ name, skills }) {
             className="font-weight-bold "
             style={{ fontSize: "20px", cursor: "pointer" }}
           >
-            {name}
+            {props.name}
           </p>
-          <p className="text-muted">Web Developer</p>
+          <p className="text-muted"></p>
           <p className="text-muted">
             <img src={pinLocation} alt="location" />
             <span className="ml-2">Address not Set</span>
           </p>
-          <div className="card__skills">
+          {/* <div className="card__skills">
             {skills?.length > 0 ? (
               skills.map((skill) => <div className="card__skill">{skill}</div>)
             ) : (
               <p className="text-muted">No Skill Includes</p>
             )}
-          </div>
+          </div> */}
+          <p className="text-muted">No Skill Includes</p>
         </div>
       </div>
     </>

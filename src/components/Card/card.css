@@ -57,5 +57,12 @@
 @media screen and (max-width: 567px) {
    .card {
      width: 100%;
+     height: auto;
+     display: flex;
+     flex-direction: column;
+   }
+   .card__profile{
+    width: auto;
+    height: 300px;
    }
 }
