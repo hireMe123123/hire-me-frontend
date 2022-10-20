@@ -6,7 +6,7 @@ import { Container } from "react-bootstrap";
 
 function NavbarHeader({ isLogin }) {
   return (
-    <Navbar bg="white" expand="lg" className="mt-4">
+    <Navbar bg="white" expand="lg" className="my-4">
       <Container>
         <Navbar.Brand href="#home">
           <img src={logo} alt="Logo" height={35} />
