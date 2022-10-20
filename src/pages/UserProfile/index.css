@@ -13,6 +13,12 @@
   );
 }
 
+.icons {
+  width: 20px;
+  margin-right: 20px;
+  margin-bottom: 5px;
+}
+
 @media (max-width: 768px) {
   .background-purple-white {
     background: linear-gradient(
