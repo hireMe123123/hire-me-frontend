@@ -5,6 +5,7 @@
 .container-auth {
   background-color: #e5e5e5;
   height: 100vh;
+  overflow: hidden;
 }
 
 .hire-image {
@@ -54,6 +55,9 @@
 .container-auth-right {
   margin-top: -200px;
   padding-bottom: 45px;
+}
+.short-text {
+  display: none;
 }
 .container-title {
   font-family: "Open Sans";
@@ -170,4 +174,53 @@
   background: #fbb017;
   border-radius: 4px;
   color: white;
+}
+@media (max-width: 870px) {
+  .row-auth {
+    flex-direction: row;
+    height: 80vh;
+    margin-right: 65%;
+  }
+  .bg-image {
+    display: none;
+  }
+
+  .full-text {
+    display: none;
+  }
+  .short-text {
+    display: inline-block;
+  }
+}
+@media (max-width: 576px) {
+  .row-auth {
+    flex-direction: row;
+    height: 80vh;
+    max-width: 20px;
+  }
+  .bg-image {
+    display: none;
+  }
+
+  .full-text {
+    display: none;
+  }
+  .short-text {
+    display: inline-block;
+  }
+  .auth-form-text {
+    margin-left: 20px;
+  }
+  .auth-form input {
+    max-width: 80%;
+    margin-left: 20px;
+  }
+  .in-button {
+    max-width: 50%;
+    margin-left: 100px;
+  }
+  .account-check {
+    max-width: 50%;
+    margin-left: 100px;
+  }
 }
