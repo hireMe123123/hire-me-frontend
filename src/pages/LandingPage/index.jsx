@@ -13,7 +13,7 @@ import NavbarHeader from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
 function LandingPage() {
-  const isLogin = false;
+  const isLogin = localStorage.getItem("token");
   return (
     <>
       <header>

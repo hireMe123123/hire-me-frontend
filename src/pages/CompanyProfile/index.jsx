@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import noPhoto from "../../assets/img/no-photo.png";
@@ -8,7 +8,21 @@ import linkedinIcon from "../../assets/img/icons/linkedin-icon.png";
 import instagramIcon from "../../assets/img/icons/instagram-icon.png";
 import "./index.css";
 
+import { getDataCompanyById } from "../../stores/actions/company";
+import { useSelector, useDispatch } from "react-redux";
+
 export default function CompanyProfile() {
+  const companyId = "ebfffa52-df66-4d49-b6bb-0af5f29aad7d";
+
+  const company = useSelector((state) => state.company);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getDataCompanyById(companyId));
+  }, [companyId]);
+
+  console.log(company.data[0]);
+
   return (
     <div>
       <div>
@@ -26,19 +40,15 @@ export default function CompanyProfile() {
                     alt=""
                     className="w-25 rounded-circle mb-5"
                   />
-                  <div className="h4">PT. Martabat Jaya Abadi</div>
-                  <div className="h6">Financial</div>
-                  <div className="text-muted mb-5">Jakarta, Indonesia</div>
+                  <div className="h4">{company.data[0].name}</div>
+                  <div className="h6">{company.data[0].field}</div>
+                  <div className="text-muted mb-5">
+                    {company.data[0].location}
+                  </div>
                   <div className="text-muted text-center mb-5">
-                    {" "}
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.{" "}
+                    {company.data[0].description
+                      ? company.data[0].description
+                      : "Lorem Ipsum dolat sit amet, consectetur adipiscing elit. Nullam auctor, nunc vel ultricies luctus, nunc nisl aliquet nunc, vel lacinia nisl lorem vel nisl. Nullam auctor, nunc vel ultricies luctus, nunc nisl aliquet nunc, vel lacinia nisl lorem vel nisl."}
                   </div>
                   <button className="btn btn-primary w-50 mb-5">
                     Edit Profile
@@ -53,11 +63,17 @@ export default function CompanyProfile() {
                     </div>
                     <div className="col-10">
                       <div className="text-muted mb-3">
-                        martabatjaya@gmail.com
+                        {company.data[0].email}
                       </div>
-                      <div className="text-muted mb-3">martabat_jaya</div>
-                      <div className="text-muted mb-3">0812-3456-7889</div>
-                      <div className="text-muted mb-3">Martabat Jaya Abadi</div>
+                      <div className="text-muted mb-3">
+                        {company.data[0].instagram}
+                      </div>
+                      <div className="text-muted mb-3">
+                        {company.data[0].phonenumber}
+                      </div>
+                      <div className="text-muted mb-3">
+                        {company.data[0].linkedin}
+                      </div>
                     </div>
                   </div>
                 </div>

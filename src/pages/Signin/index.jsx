@@ -1,31 +1,33 @@
 /* IMPORT CSS */
 import "./index.css";
 import hire from "../../assets/img/hireme.png";
-/* IMPORT AXIOS */
-import axios from "../../utils/axios";
 
 /* IMPORT IMAGE */
 /* React Function */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import { login } from "../../stores/actions/auth";
+import { useDispatch } from "react-redux";
+import { getDataUserById } from "../../stores/actions/user";
 
 export default function Signin() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-  const handleLogin = async () => {
-    try {
-      const result = await axios.post("auth/login", form);
-      localStorage.setItem("idUser", result.data.data.userId);
-      localStorage.setItem("token", result.data.data.token);
-      alert(result.data.msg);
-      navigate("/");
-    } catch (error) {
-      alert(error.response.data.msg);
-    }
+
+  const handleLogin = () => {
+    dispatch(login(form))
+      .then((response) => {
+        alert(response.value.data.message);
+        dispatch(getDataUserById(response.value.data.data.userId));
+        localStorage.setItem("token", response.value.data.data.token);
+        navigate("/");
+      })
+      .catch((error) => alert(error));
   };
 
   const handleChangeForm = (e) => {

@@ -21,9 +21,9 @@ export default function Signup() {
   const handleSignup = async () => {
     try {
       const result = await axios.post("auth/register", form);
-      alert(result.data.msg);
+      alert(result.data.message);
     } catch (error) {
-      alert(error.response.data.msg);
+      alert(error.response.data.message);
     }
   };
   const handleChangeForm = (e) => {
