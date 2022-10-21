@@ -11,22 +11,36 @@ import EditProfileCompany from "./pages/EditProfile/CompanyProfile";
 import Signin from "./pages/Signin";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import PublicRoute from "./utils/routes/publicRoute";
+import PrivateRoute from "./utils/routes/privateRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/user-profile" element={<UserProfile />} />
         <Route path="/" element={<LandingPage />} />
-        <Route path="/company-profile" element={<CompanyProfile />} />
-        <Route path="/user-hire" element={<UserHire />} />
-        <Route path="/edit-user" element={<EditProfileUser />} />
-        <Route path="/edit-company" element={<EditProfileCompany />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/home" element={<HomePage />} />
+
+        {/* PUBLIC ROUTE */}
+        <Route element={<PublicRoute />}>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/signin" element={<Signin />} />
+        </Route>
+
+        {/* PRIVATE ROUTE */}
+        <Route element={<PrivateRoute />}>
+          <Route path="/user-hire" element={<UserHire />} />
+          <Route path="/edit-user" element={<EditProfileUser />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+        </Route>
+
+        {/* PRIVARE ADMIN ROUTE */}
+        <Route element={<PrivateRoute isAdmin={true} />}>
+          <Route path="/user-profile" element={<UserProfile />} />
+          <Route path="/company-profile" element={<CompanyProfile />} />
+          <Route path="/edit-company" element={<EditProfileCompany />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

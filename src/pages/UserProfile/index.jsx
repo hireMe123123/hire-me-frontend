@@ -12,7 +12,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import "./index.css";
 
-import { getDataUserById } from "../../stores/action/user";
+import { getDataUserById } from "../../stores/actions/user";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function UserProfile() {
@@ -20,6 +20,7 @@ export default function UserProfile() {
 
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  // console.log(user);
 
   useEffect(() => {
     dispatch(getDataUserById(userId));
