@@ -96,12 +96,9 @@
 
   color: #9ea0a5;
 }
-.asdfg {
-  width: 100% !important;
-}
 .auth-form input {
   box-sizing: border-box;
-  /* width: 570px; */
+  width: 570px;
   height: 50px;
   background: #ffffff;
   border: 1px solid #e2e5ed;
@@ -201,10 +198,6 @@
     height: 80vh;
     max-width: 20px;
   }
-  .asdf {
-    padding: 20px;
-    background-color: red;
-  }
   .bg-image {
     display: none;
   }
@@ -215,7 +208,7 @@
   .short-text {
     display: inline-block;
   }
-  /* .auth-form-text {
+  .auth-form-text {
     margin-left: 20px;
   }
   .auth-form input {
@@ -229,5 +222,5 @@
   .account-check {
     max-width: 50%;
     margin-left: 100px;
-  } */
+  }
 }

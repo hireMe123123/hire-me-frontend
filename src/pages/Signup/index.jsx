@@ -47,7 +47,7 @@ export default function Signup() {
             </div>
           </div>
           <div className="col-sm-6 d-flex justify-content-start align-items-center">
-            <header className="asdf">
+            <header>
               <div className="container-auth-signup">
                 <h1 className="full-text container-title">Halo, Pewpeople</h1>
                 <h1 className="short-text container-title">Signup</h1>
@@ -63,7 +63,7 @@ export default function Signup() {
                 <h6 className="auth-form-text">Nama</h6>
                 <input
                   type="text"
-                  className="asdfg form-control"
+                  className="form-control"
                   name="name"
                   placeholder="Masukan nama panjang"
                   onChange={handleChangeForm}
