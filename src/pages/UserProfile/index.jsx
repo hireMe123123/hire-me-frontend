@@ -34,6 +34,29 @@ export default function UserProfile() {
     { id: 6, title: "Portofolio App 6", image: noPhoto },
   ];
 
+  const pengalaman = [
+    {
+      id: 1,
+      company: "Company 1",
+      image: noPhoto,
+      position: "Frontend Developer",
+      entryDate: "June 2020",
+      exitDate: "Present",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc vel ultricies lacinia, nunc nisl ultricies nisl, eget ultricies nunc lorem eget nunc. Sed euismod, nunc vel ultricies lacinia, nunc nisl ultricies nisl, eget ultricies nunc lorem eget nunc.",
+    },
+    {
+      id: 2,
+      company: "Company 2",
+      image: noPhoto,
+      position: "Backend Developer",
+      entryDate: "June 2022",
+      exitDate: "Present",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc vel ultricies lacinia, nunc nisl ultricies nisl, eget ultricies nunc lorem eget nunc. Sed euismod, nunc vel ultricies lacinia, nunc nisl ultricies nisl, eget ultricies nunc lorem eget nunc.",
+    },
+  ];
+
   return (
     <div>
       {/* Header */}
@@ -71,7 +94,9 @@ export default function UserProfile() {
                         ? user.data[0].description
                         : " Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum ea saepe sit ea fuga quisquam architecto atque nostrum minus facilis repellendus laboriosam beatae ut dolor aspernatur! Aliquam labore at beatae. Ut cupiditate quaerat aperiam delectus impedit neque officiis repellat iure sit animi nulla natus tension! Eaque totam error occaecati, quaerat itaque nostrum. Sequi rerum voluptate eveniet necessitatibus."}
                     </div>
-                    <button className="btn w-100 btn-primary mb-4">Hire</button>
+                    <button className="btn w-100 background-purple mb-4 text-white">
+                      Hire
+                    </button>
                     <div className="fw-bold h5">Skill</div>
                     <div className="text-muted mb-2">
                       <img src={mailIcon} alt="" className="icons" />
@@ -132,8 +157,8 @@ export default function UserProfile() {
                         aria-labelledby="portofolio-tab"
                       >
                         {/* Map listPortofolio */}
-                        <div className="row">
-                          <div className="d-flex flex-row flex-wrap justify-content-between gap-5 bg-white text-dark">
+                        <div className="row bg-white ">
+                          <div className="d-flex flex-row flex-wrap justify-content-evenly gap-5 text-dark">
                             {/* <div className="col-3"> */}
                             {portofolio.map((item) => (
                               <ListPortofolio
@@ -152,7 +177,18 @@ export default function UserProfile() {
                         role="tabpanel"
                         aria-labelledby="userExperience-tab"
                       >
-                        <ListPengalaman />
+                        {/* Map listExperience */}
+                        {pengalaman.map((item) => (
+                          <ListPengalaman
+                            key={item.id}
+                            company={item.company}
+                            position={item.position}
+                            entryDate={item.entryDate}
+                            exitDate={item.exitDate}
+                            description={item.description}
+                            image={item.image}
+                          />
+                        ))}
                       </div>
                     </div>
                   </div>
