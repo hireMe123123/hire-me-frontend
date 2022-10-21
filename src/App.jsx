@@ -11,8 +11,8 @@ import EditProfileCompany from "./pages/EditProfile/CompanyProfile";
 import Signin from "./pages/Signin";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
-import PublicRoute from "./utils/routes/PublicRoute";
-import PrivateRoute from "./utils/routes/PrivateRoute";
+import PublicRoute from "./utils/routes/publicRoute";
+import PrivateRoute from "./utils/routes/privateRoute";
 
 function App() {
   return (
