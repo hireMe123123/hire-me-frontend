@@ -1,27 +1,24 @@
 import React from "react";
-import noPhoto from "../../assets/img/no-photo.png";
+import "./index.css";
 
-export default function ListPengalaman() {
+export default function ListPengalaman(props) {
   return (
     <div className="bg-white">
       <div className="row ">
-        <div className="col-2">
-          <img src={noPhoto} alt="" className="w-100" />
+        <div className="col-3">
+          <img src={props.image} alt="" className="w-100" />
         </div>
-        <div className="col-10">
-          <div className="fw-bold text-dark">Engineer</div>
-          <div className="text-muted">Tokopedia</div>
-          <div className="text-muted">July 2019 - January 2020 6 Months</div>
-          <div className="text-muted mt-3">
-            {" "}
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+        <div className="col-9">
+          <div className="position-text">{props.position}</div>
+          <div className="text-muted">{props.company}</div>
+          <div className="text-muted">
+            {props.entryDate ? props.entryDate : "-"} {" - "}
+            {props.exitDate ? props.exitDate : "Present"}
           </div>
+          <div className="text-muted mt-3"> {props.description}</div>
         </div>
+        <hr />
       </div>
-      <hr />
     </div>
   );
 }
