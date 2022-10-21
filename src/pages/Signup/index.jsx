@@ -47,19 +47,23 @@ export default function Signup() {
             </div>
           </div>
           <div className="col-sm-6 d-flex justify-content-start align-items-center">
-            <header>
+            <header className="asdf">
               <div className="container-auth-signup">
-                <h1 className="container-title">Halo, Pewpeople</h1>
-                <p className="text-container">
+                <h1 className="full-text container-title">Halo, Pewpeople</h1>
+                <h1 className="short-text container-title">Signup</h1>
+                <br />
+                <p className="full-text text-container">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
                   euismod ipsum et dui rhoncus auctor
                 </p>
+                <p className="short-text text-container">Lorememe</p>
               </div>
+              <br />
               <div className="auth-form">
                 <h6 className="auth-form-text">Nama</h6>
                 <input
                   type="text"
-                  className="form-control"
+                  className="asdfg form-control"
                   name="name"
                   placeholder="Masukan nama panjang"
                   onChange={handleChangeForm}
@@ -107,7 +111,7 @@ export default function Signup() {
                 >
                   Daftar
                 </button>
-                <h4 className="d-flex justify-content-center account-check">
+                <h4 className="account-check d-flex justify-content-center">
                   Anda sudah punya akun? <a href="#"> Masuk disini</a>
                 </h4>
               </div>
