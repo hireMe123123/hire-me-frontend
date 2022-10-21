@@ -8,7 +8,7 @@ import linkedinIcon from "../../assets/img/icons/linkedin-icon.png";
 import instagramIcon from "../../assets/img/icons/instagram-icon.png";
 import "./index.css";
 
-import { getDataCompanyById } from "../../stores/action/company";
+import { getDataCompanyById } from "../../stores/actions/company";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function CompanyProfile() {
