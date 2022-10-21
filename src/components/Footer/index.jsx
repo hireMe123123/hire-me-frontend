@@ -25,7 +25,7 @@ function Footer() {
             2020 Pewworld. All right reserved
           </p>
 
-          <div className="d-flex gap-5">
+          <div className="d-flex gap-5 footer-contact">
             <p className="text-white fs-18px">Telepon</p>
             <p className="text-white fs-18px">Email</p>
           </div>
