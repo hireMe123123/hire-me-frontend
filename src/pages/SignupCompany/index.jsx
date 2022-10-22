@@ -29,7 +29,7 @@ export default function SignupCompany() {
     dispatch(registerCompany(form))
       .then((response) => {
         alert(response.value.data.message);
-        navigate("/signin");
+        navigate("/signin-company");
       })
       .catch((error) => alert(error));
   };
@@ -64,7 +64,7 @@ export default function SignupCompany() {
                 </p>
               </div>
               <div className="auth-form">
-                <h7 className="auth-form-text">Nama</h7>
+                <h6 className="auth-form-text">Nama</h6>
                 <input
                   type="text"
                   className="form-control"
@@ -73,7 +73,7 @@ export default function SignupCompany() {
                   onChange={handleChangeForm}
                 />{" "}
                 <br />
-                <h7 className="auth-form-text">Email</h7>
+                <h6 className="auth-form-text">Email</h6>
                 <input
                   type="email"
                   className="form-control"
@@ -82,7 +82,7 @@ export default function SignupCompany() {
                   onChange={handleChangeForm}
                 />{" "}
                 <br />
-                <h7 className="auth-form-text">Perusahaan</h7>
+                <h6 className="auth-form-text">Perusahaan</h6>
                 <input
                   type="text"
                   className="form-control"
@@ -91,7 +91,7 @@ export default function SignupCompany() {
                   onChange={handleChangeForm}
                 />{" "}
                 <br />
-                <h7 className="auth-form-text">Bidang Perusahaan</h7>
+                <h6 className="auth-form-text">Bidang Perusahaan</h6>
                 <input
                   type="text"
                   className="form-control"
@@ -100,7 +100,7 @@ export default function SignupCompany() {
                   onChange={handleChangeForm}
                 />{" "}
                 <br />
-                <h7 className="auth-form-text">No handphone</h7>
+                <h6 className="auth-form-text">No handphone</h6>
                 <input
                   type="text"
                   className="form-control"
@@ -109,7 +109,7 @@ export default function SignupCompany() {
                   onChange={handleChangeForm}
                 />{" "}
                 <br />
-                <h7 className="auth-form-text">Kata sandi</h7>
+                <h6 className="auth-form-text">Kata sandi</h6>
                 <input
                   type="text"
                   className="form-control"
@@ -118,7 +118,7 @@ export default function SignupCompany() {
                   onChange={handleChangeForm}
                 />{" "}
                 <br />
-                <h7 className="auth-form-text">Konfirmasi kata sandi</h7>
+                <h6 className="auth-form-text">Konfirmasi kata sandi</h6>
                 <input
                   type="text"
                   className="form-control"
