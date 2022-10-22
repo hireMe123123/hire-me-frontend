@@ -3,6 +3,8 @@ import "./index.css";
 import hire from "../../assets/img/hireme.png";
 
 /* IMPORT IMAGE */
+import logo from "../../assets/img/logo.png";
+
 /* React Function */
 import { useNavigate } from "react-router-dom";
 import React from "react";
@@ -54,6 +56,13 @@ export default function Signup() {
           <div className="col-md-6 col-sm-12 d-flex justify-content-start align-items-center">
             <header className="right-side">
               <div className="container-auth-right">
+                <img
+                  src={logo}
+                  alt="Logo"
+                  height={35}
+                  className="mb-5"
+                  onClick={() => handleNavigate("")}
+                />
                 <h1 className="full-text container-title">Halo, Pewpeople</h1>
                 <h1 className="short-text container-title">Signup</h1>
                 <br />
