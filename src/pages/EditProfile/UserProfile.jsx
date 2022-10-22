@@ -23,12 +23,12 @@ export default function EditProfileUser() {
   const user = useSelector((state) => state.user);
   const dataUser = user.data[0];
   const [userData, setUserData] = useState(dataUser);
-  const [experience, setExperience] = useState({ userId: dataUser.userId });
-  const [portofolio, setPortofolio] = useState({ userId: dataUser.userId });
+  const [experience, setExperience] = useState({ userId: dataUser?.userId });
+  const [portofolio, setPortofolio] = useState({ userId: dataUser?.userId });
   const [newImage, setNewImage] = useState({});
   const [imagePreview, setImagePreview] = useState("");
   const lengthImage = Object.keys(newImage).length;
-  console.log(imagePreview);
+  // console.log(imagePreview);
 
   const inputData = (e) => {
     const { name, value } = e.target;
