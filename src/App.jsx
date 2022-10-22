@@ -23,12 +23,13 @@ function App() {
 
         {/* PUBLIC ROUTE */}
         <Route element={<PublicRoute />}>
+          <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
         </Route>
-        <Route path="/signin" element={<Signin />} />
 
         {/* PRIVATE ROUTE */}
         <Route element={<PrivateRoute />}>
+          <Route path="/user-profile" element={<UserProfile />} />
           <Route path="/user-hire" element={<UserHire />} />
           <Route path="/edit-user" element={<EditProfileUser />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -37,7 +38,6 @@ function App() {
 
         {/* PRIVARE ADMIN ROUTE */}
         <Route element={<PrivateRoute isAdmin={true} />}>
-          <Route path="/user-profile" element={<UserProfile />} />
           <Route path="/company-profile" element={<CompanyProfile />} />
           <Route path="/edit-company" element={<EditProfileCompany />} />
         </Route>

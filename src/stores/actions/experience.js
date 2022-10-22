@@ -6,3 +6,10 @@ export const getDataExperienceByUserId = (id) => {
     payload: axios.get(`/experience/user/${id}`),
   };
 };
+
+export const createExperience = (data) => {
+  return {
+    type: "CREATE_EXPERIENCE",
+    payload: axios.post("experience", data),
+  };
+};

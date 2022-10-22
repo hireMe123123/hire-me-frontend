@@ -4,7 +4,9 @@ import logo from "../../assets/img/logo.png";
 import ButtonSmall from "../../components/Buttons/ButtonSmall";
 import { Container } from "react-bootstrap";
 
-function NavbarHeader({ isLogin }) {
+function NavbarHeader() {
+  const isLogin = localStorage.getItem("token");
+
   return (
     <Navbar bg="white" expand="lg" className="my-4">
       <Container>
@@ -35,10 +37,12 @@ function NavbarHeader({ isLogin }) {
               <ButtonSmall
                 content={"Masuk"}
                 classElement={"color-purple border-purple me-3 fw-bold"}
+                navigateAuth={"signin"}
               />
               <ButtonSmall
                 content={"Daftar"}
                 classElement={"text-white background-purple fw-bold"}
+                navigateAuth={"signup"}
               />
             </>
           )}

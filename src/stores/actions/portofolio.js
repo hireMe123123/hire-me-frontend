@@ -6,3 +6,10 @@ export const getDataPortofolioByUserId = (id) => {
     payload: axios.get(`portfolio/user/${id}`),
   };
 };
+
+export const createPortofolio = (data) => {
+  return {
+    type: "CREATE_PORTOFOLIO",
+    payload: axios.post("portfolio", data),
+  };
+};
