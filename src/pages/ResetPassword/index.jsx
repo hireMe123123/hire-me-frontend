@@ -23,7 +23,7 @@ export default function ResetPassword() {
       // const result = await axios.post("auth/resetPassword/OTPReset", form);
       // alert(result.data.msg);
     } catch (error) {
-      alert(error.response.data.msg);
+      alert(error.response.data.message);
     }
   };
   const handleChangeForm = (e) => {
