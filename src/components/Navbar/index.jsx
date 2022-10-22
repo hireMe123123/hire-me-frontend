@@ -35,7 +35,7 @@ function NavbarHeader() {
           {isLogin ? (
             <>
               <Nav className="pl-120px">
-                <Nav.Link href="/" className={`fw-bold fs-6`}>
+                <Nav.Link href="/home" className={`fw-bold fs-6`}>
                   Home
                 </Nav.Link>
               </Nav>
@@ -51,7 +51,10 @@ function NavbarHeader() {
                     />
                   ) : (
                     <img
-                      src={noPhoto}
+                      src={
+                        // `https://ui-avatars.com/api/?name=${user.data[0].name}&background=random&size=44`
+                        noPhoto
+                      }
                       alt="No Photo"
                       className="rounded-circle"
                       height={35}
