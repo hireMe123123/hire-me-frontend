@@ -5,29 +5,47 @@ import "./homePage.css";
 import Footer from "../../components/Footer";
 import NavbarHeader from "../../components/Navbar";
 import arrow from "../../assets/img/arrow_searchbar_home.svg";
-import Pagination from "../../components/Pagination";
-import axios from "../../utils/axios";
+// import Pagination from "../../components/Pagination";
+// import axios from "../../utils/axios";
 import Card from "../../components/Card";
+import { useDispatch, useSelector } from "react-redux";
+import { getDataUser } from "../../stores/actions/user";
+import ReactPaginate from "react-paginate";
 
 export default function HomePage() {
+  const dispatch = useDispatch();
+  const getEmployee = useSelector((state) => state.user.data);
+  const pageInfo = useSelector((state) => state.user.pageInfo);
   const isLogin = false;
   const [rotate, setRotate] = useState(false);
   const [dropDown, setDropDown] = useState(false);
-  const [getEmployee, setGetEmployee] = useState({});
+  const [page, setPage] = useState(1);
+  const limit = 6;
+  const [sortBy, setSortBy] = useState("");
+  const [sortBySkill, setSortBySkill] = useState("");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    getDataUser();
+    getData();
   }, []);
 
-  const getDataUser = async () => {
+  useEffect(() => {
+    getData();
+  }, [page, search, sortBy, sortBySkill]);
+
+  const getData = async () => {
     try {
-      const employee = await axios.get("api/user/getalluser");
-      setGetEmployee(employee.data.data);
+      dispatch(getDataUser(page, limit, sortBy, search, sortBySkill));
+      console.log(getEmployee);
+      console.log(pageInfo);
     } catch (error) {
       console.log(error.response);
     }
   };
-  console.log(getEmployee);
+
+  const handlePagination = (data) => {
+    setPage(data.selected + 1);
+  };
 
   return (
     <>
@@ -40,7 +58,10 @@ export default function HomePage() {
       <div className="home__body">
         <div className="home__container">
           <div className="home__searchbar">
-            <input placeholder="Search for any skill" />
+            <input
+              placeholder="Search for any skill"
+              onChange={(e) => setSearch(e.target.value)}
+            />
             <div className="d-flex flex-row justify-content-center align-items-center">
               <img
                 src={arrow}
@@ -59,24 +80,47 @@ export default function HomePage() {
               >
                 Sort
               </p>
-              <ul className="sortDrop list-group">
+              <ul className={`sortDrop list-group ${dropDown && "active"}`}>
                 <li
                   className="list-group-item"
                   style={{ cursor: "pointer" }}
                   onClick={() => {
+                    setSortBySkill("totalskills");
                     setDropDown(!dropDown);
                   }}
                 >
-                  Address
+                  Sort By Skills
                 </li>
                 <li
                   className="list-group-item"
                   style={{ cursor: "pointer" }}
                   onClick={() => {
+                    setSortBy("Freelance");
+                    setDropDown(!dropDown);
+                    setSortBySkill("");
+                  }}
+                >
+                  Sort By Freelance
+                </li>
+                <li
+                  className="list-group-item"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setSortBy("Fulltime");
                     setDropDown(!dropDown);
                   }}
                 >
-                  Name
+                  Sort By Fulltime
+                </li>
+                <li
+                  className="list-group-item"
+                  style={{ cursor: "pointer", color: "red" }}
+                  onClick={() => {
+                    setSortBy("");
+                    setDropDown(!dropDown);
+                  }}
+                >
+                  Reset
                 </li>
               </ul>
             </div>
@@ -84,15 +128,35 @@ export default function HomePage() {
           </div>
           <div className="main__section">
             {getEmployee.length > 0 ? (
-              getEmployee.map((i) => <Card name={i.name} />)
+              getEmployee.map((i) => (
+                <Card
+                  name={i.name}
+                  job={i.profession}
+                  jobType={i.typeJob}
+                  location={i.domicile}
+                  image={i.image}
+                  skills={i.userSkill}
+                />
+              ))
             ) : (
               <h1 className="w-100">Loading ..</h1>
             )}
           </div>
         </div>
-        <div className="home__pagination">
+        {/* <div className="home__pagination">
           <Pagination />
-        </div>
+        </div> */}
+        <ReactPaginate
+          previousLabel={"<"}
+          nextLabel={">"}
+          pageCount={pageInfo.totalPage}
+          onPageChange={handlePagination}
+          containerClassName={"pagination"}
+          previousLinkClassName={"pagination__link"}
+          nextLinkClassName={"pagination__link"}
+          disabledClassName={"pagination__link--disabled"}
+          activeClassName={"pagination__link--active"}
+        />
       </div>
       <Footer />
     </>
