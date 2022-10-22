@@ -4,26 +4,29 @@ import hire from "../../assets/img/hireme.png";
 
 /* IMPORT IMAGE */
 /* React Function */
-import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import React from "react";
-/* IMPORT AXIOS */
-import axios from "../../utils/axios";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { forgotPasswordUser } from "../../stores/actions/forgotPasswordUser";
 
 export default function ForgotPassword() {
+  // const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: "",
   });
+  // const handleNavigate = (nav) => {
+  //   navigate(`/${nav}`);
+  // };
 
-  const handleForgot = async () => {
-    try {
-      const result = await axios.post("auth/forgotPassword", form);
-      alert(result.data.msg);
-    } catch (error) {
-      alert(error.response.data.msg);
-    }
+  const handleForgotPasswordUser = () => {
+    dispatch(forgotPasswordUser(form))
+      .then((response) => {
+        alert(response.value.data.message);
+      })
+      .catch((error) => alert(error));
   };
-
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -33,7 +36,7 @@ export default function ForgotPassword() {
       {/* START MAIN */}
       <main className="container-auth">
         <div className="row row-auth">
-          <div className="col-sm-6 d-flex justify-content-center align-items-center">
+          <div className="col-md-6 col-sm-12 d-flex justify-content-center align-items-center">
             <div className="bg-image">
               <img src={hire} alt="hire" className="hire-image" />
               <div className="mask"></div>
@@ -45,8 +48,8 @@ export default function ForgotPassword() {
               </div>
             </div>
           </div>
-          <div className="col-sm-6 d-flex justify-content-start align-items-center">
-            <header>
+          <div className="col-md-6 col-sm-12 d-flex justify-content-start align-items-center">
+            <header className="right-side">
               <div className="container-auth-right">
                 <h1 className="container-title">Reset password</h1>
                 <p className="text-container">
@@ -64,12 +67,14 @@ export default function ForgotPassword() {
                   onChange={handleChangeForm}
                 />{" "}
                 <br />
-                <button
-                  className="btn btn-warning in-button"
-                  onClick={handleForgot}
-                >
-                  Send password reset email
-                </button>
+                <div className="d-grid">
+                  <button
+                    className="btn btn-warning in-button"
+                    onClick={handleForgotPasswordUser}
+                  >
+                    Send password reset email
+                  </button>
+                </div>
               </div>
             </header>
           </div>

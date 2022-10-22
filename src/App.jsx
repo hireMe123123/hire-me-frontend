@@ -13,6 +13,8 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import PublicRoute from "./utils/routes/publicRoute";
 import PrivateRoute from "./utils/routes/privateRoute";
+import SignupCompany from "./pages/SignupCompany";
+import SigninCompany from "./pages/SigninCompany";
 
 function App() {
   return (
@@ -25,14 +27,16 @@ function App() {
         <Route element={<PublicRoute />}>
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:OTP" element={<ResetPassword />} />
+          <Route path="/signup-company" element={<SignupCompany />} />
+          <Route path="/signin-company" element={<SigninCompany />} />
         </Route>
 
         {/* PRIVATE ROUTE */}
         <Route element={<PrivateRoute />}>
           <Route path="/user-hire" element={<UserHire />} />
           <Route path="/edit-user" element={<EditProfileUser />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
 
         {/* PRIVARE ADMIN ROUTE */}

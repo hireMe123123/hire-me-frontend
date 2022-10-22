@@ -7,9 +7,9 @@ import hire from "../../assets/img/hireme.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import { login } from "../../stores/actions/auth";
+import { loginCompany } from "../../stores/actions/signincompany";
 import { useDispatch } from "react-redux";
-import { getDataUserById } from "../../stores/actions/user";
+import { getDataCompanyById } from "../../stores/actions/company";
 
 export default function Signin() {
   const navigate = useNavigate();
@@ -22,10 +22,10 @@ export default function Signin() {
     navigate(`/${nav}`);
   };
   const handleLogin = () => {
-    dispatch(login(form))
+    dispatch(loginCompany(form))
       .then((response) => {
         alert(response.value.data.message);
-        dispatch(getDataUserById(response.value.data.data.userId));
+        dispatch(getDataCompanyById(response.value.data.data.companyId));
         localStorage.setItem("token", response.value.data.data.token);
         navigate("/");
       })
