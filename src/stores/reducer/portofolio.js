@@ -10,8 +10,10 @@ const portofolio = (state = initialState, action) => {
     case "GET_DATA_PORTOFOLIO_BY_USER_ID_PENDING":
       return {
         ...state,
+        data: {},
         isLoading: true,
         isError: false,
+        message: "",
       };
 
     case "GET_DATA_PORTOFOLIO_BY_USER_ID_FULFILLED":
@@ -28,6 +30,30 @@ const portofolio = (state = initialState, action) => {
         isLoading: false,
         isError: true,
         message: action.payload.response.data,
+      };
+
+    case "CREATE_PORTOFOLIO_PENDING":
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+        message: "",
+      };
+
+    case "CREATE_PORTOFOLIO_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        message: action.payload.data.message,
+      };
+
+    case "CREATE_PORTOFOLIO_REJECTED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: action.payload.response.data.message,
       };
 
     default: {
