@@ -1,10 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import people from "../../assets/img/img-opinion3.png";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { Icon } from "@iconify/react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getDataCompanyById,
+  updateDataCompany,
+} from "../../stores/actions/company";
 
 export default function EditProfileCompany() {
+  const dispatch = useDispatch();
+  const company = useSelector((state) => state.company);
+  const dataCompany = company.data[0];
+  const [companyData, setCompanyData] = useState(dataCompany);
+
+  const inputData = (e) => {
+    const { name, value } = e.target;
+    setCompanyData({ ...companyData, [name]: value });
+  };
+
+  const handleUpdateDataCompany = () => {
+    dispatch(updateDataCompany(dataCompany.companyId, companyData)).then(
+      (response) => {
+        dispatch(getDataCompanyById(dataCompany.companyId));
+        alert(response.value.data.message);
+      }
+    );
+  };
+
   return (
     <>
       <header>
@@ -38,26 +62,38 @@ export default function EditProfileCompany() {
                         </button>
                       </div>
                       <div className="fw-semibold color-bold h4">
-                        PT. Martabat Jaya Abadi
+                        {dataCompany.name
+                          ? dataCompany.name
+                          : "Please add your company name"}
                       </div>
-                      <div className="color-bold">Financial</div>
+                      <div className="color-gray">
+                        {dataCompany.field
+                          ? dataCompany.field
+                          : "Please add your company field"}
+                      </div>
 
                       <div className="d-flex align-items-center color-gray gap-2 mt-3">
                         <Icon icon={"akar-icons:location"} width="16" />
-                        <div className="">Purwokerto, Jawa Tengah</div>
+                        <div className="">
+                          {dataCompany.location
+                            ? dataCompany.location
+                            : "Please add your company location"}
+                        </div>
                       </div>
 
                       <div className="color-gray mb-4 mt-3">
                         {" "}
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Vestibulum erat orci, mollis nec gravida sed, ornare
-                        quis urna. Curabitur eu lacus fringilla, vestibulum
-                        risus at.
+                        {dataCompany.description
+                          ? dataCompany.description
+                          : "Please add description about your company"}
                       </div>
                     </div>
 
                     <div className="d-flex flex-column gap-3 mt-4">
-                      <button className="button button_base fw-bold background-purple text-white">
+                      <button
+                        className="button button_base fw-bold background-purple text-white"
+                        onClick={handleUpdateDataCompany}
+                      >
                         Simpan
                       </button>
                       <button className="button button_base fw-bold border-purple color-purple">
@@ -85,6 +121,8 @@ export default function EditProfileCompany() {
                               id="name"
                               name="name"
                               placeholder="Masukkan nama lengkap"
+                              value={companyData.name ? companyData.name : ""}
+                              onChange={inputData}
                             />
                           </div>
 
@@ -95,6 +133,8 @@ export default function EditProfileCompany() {
                               id="field"
                               name="field"
                               placeholder="Masukkan bidang perusahaan ex: Financial"
+                              value={companyData.field ? companyData.field : ""}
+                              onChange={inputData}
                             />
                           </div>
 
@@ -104,7 +144,11 @@ export default function EditProfileCompany() {
                               type="text"
                               id="location"
                               name="location"
-                              placeholder="Masukkan tipe job"
+                              placeholder="Masukan Domisili"
+                              value={
+                                companyData.location ? companyData.location : ""
+                              }
+                              onChange={inputData}
                             />
                           </div>
 
@@ -117,6 +161,12 @@ export default function EditProfileCompany() {
                               id="description"
                               rows="5"
                               placeholder="Tuliskan deskripsi singkat"
+                              value={
+                                companyData.description
+                                  ? companyData.description
+                                  : ""
+                              }
+                              onChange={inputData}
                             ></textarea>
                           </div>
 
@@ -127,6 +177,8 @@ export default function EditProfileCompany() {
                               id="email"
                               name="email"
                               placeholder="Masukkan email"
+                              value={companyData.email ? companyData.email : ""}
+                              onChange={inputData}
                             />
                           </div>
 
@@ -137,6 +189,12 @@ export default function EditProfileCompany() {
                               id="instagram"
                               name="instagram"
                               placeholder="Masukkan username IG"
+                              value={
+                                companyData.instagram
+                                  ? companyData.instagram
+                                  : ""
+                              }
+                              onChange={inputData}
                             />
                           </div>
 
@@ -144,9 +202,15 @@ export default function EditProfileCompany() {
                             <label htmlFor="phoneNumber">Nomor Telepon</label>
                             <input
                               type="text"
-                              id="phoneNumber"
-                              name="phoneNumber"
+                              id="phonenumber"
+                              name="phonenumber"
                               placeholder="Masukkan nomor telepon"
+                              value={
+                                companyData.phonenumber
+                                  ? companyData.phonenumber
+                                  : ""
+                              }
+                              onChange={inputData}
                             />
                           </div>
 
@@ -154,9 +218,13 @@ export default function EditProfileCompany() {
                             <label htmlFor="linkedIn">Linkedin</label>
                             <input
                               type="text"
-                              id="linkedIn"
-                              name="linkedIn"
+                              id="linkedin"
+                              name="linkedin"
                               placeholder="Masukkan nama Linkedin"
+                              value={
+                                companyData.linkedin ? companyData.linkedin : ""
+                              }
+                              onChange={inputData}
                             />
                           </div>
                         </form>
