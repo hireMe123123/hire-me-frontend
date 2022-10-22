@@ -13,11 +13,10 @@ import NavbarHeader from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
 function LandingPage() {
-  const isLogin = localStorage.getItem("token");
   return (
     <>
       <header>
-        <NavbarHeader isLogin={isLogin} />
+        <NavbarHeader />
       </header>
 
       <main className="mt-5 main-landing">

@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import noPhoto from "../../assets/img/no-photo.png";
+import React from "react";
 import pinIcon from "../../assets/img/icons/pin-icon.png";
 import phoneIcon from "../../assets/img/icons/phone-icon.png";
 import mailIcon from "../../assets/img/icons/mail-icon.png";
@@ -7,56 +6,18 @@ import instagramIcon from "../../assets/img/icons/instagram-icon.png";
 import githubIcon from "../../assets/img/icons/github-icon.png";
 import gitlabIcon from "../../assets/img/icons/gitlab-icon.png";
 import ListPortofolio from "../../components/ListPortofolio";
-import ListPengalaman from "../../components/ListPengalaman";
+import ListExperience from "../../components/ListExperience";
+// import ListSkill from "../../components/ListSkill";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import "./index.css";
 
-import { getDataUserById } from "../../stores/actions/user";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function UserProfile() {
-  const userId = "5e57eb9a-61ce-43bf-bd25-a2eb627caaf3";
-
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-  // console.log(user);
-
-  useEffect(() => {
-    dispatch(getDataUserById(userId));
-  }, [userId]);
-
-  const portofolio = [
-    { id: 1, title: "Portofolio App 1", image: noPhoto },
-    { id: 2, title: "Portofolio App 2", image: noPhoto },
-    { id: 3, title: "Portofolio App 3", image: noPhoto },
-    { id: 4, title: "Portofolio App 4", image: noPhoto },
-    { id: 5, title: "Portofolio App 5", image: noPhoto },
-    { id: 6, title: "Portofolio App 6", image: noPhoto },
-  ];
-
-  const pengalaman = [
-    {
-      id: 1,
-      company: "Company 1",
-      image: noPhoto,
-      position: "Frontend Developer",
-      entryDate: "June 2020",
-      exitDate: "Present",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc vel ultricies lacinia, nunc nisl ultricies nisl, eget ultricies nunc lorem eget nunc. Sed euismod, nunc vel ultricies lacinia, nunc nisl ultricies nisl, eget ultricies nunc lorem eget nunc.",
-    },
-    {
-      id: 2,
-      company: "Company 2",
-      image: noPhoto,
-      position: "Backend Developer",
-      entryDate: "June 2022",
-      exitDate: "Present",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc vel ultricies lacinia, nunc nisl ultricies nisl, eget ultricies nunc lorem eget nunc. Sed euismod, nunc vel ultricies lacinia, nunc nisl ultricies nisl, eget ultricies nunc lorem eget nunc.",
-    },
-  ];
+  const portofolio = useSelector((state) => state.portofolio);
+  const experience = useSelector((state) => state.experience);
 
   return (
     <div>
@@ -70,7 +31,15 @@ export default function UserProfile() {
                 <div className="col-md-4 col-sm-12 border rounded rounded-3 bg-white">
                   <div className="px-4 py-5">
                     <div className="text-center mb-5">
-                      <img src={noPhoto} alt="" className="w-50 rounded-pill" />
+                      <img
+                        src={
+                          user.data[0].image
+                            ? `https://res.cloudinary.com/dihnhvb2q/image/upload/v1666284419/${user.data[0].image}`
+                            : "https://res.cloudinary.com/dra4ha50q/image/upload/v1665756702/Wainscot-Event-Organizing/User/default-profile_tw4rl0.png"
+                        }
+                        alt=""
+                        className="w-50 rounded-pill"
+                      />
                     </div>
                     <div className="fw-bold h4">{user.data[0].name}</div>
                     <div className="fw-bold mb-4">
@@ -98,7 +67,20 @@ export default function UserProfile() {
                     <button className="btn w-100 background-purple mb-4 text-white">
                       Hire
                     </button>
-                    <div className="fw-bold h5">Skill</div>
+                    {/* <div className="fw-bold h5">Skill</div>
+                    <div className="d-flex flex-row flex-wrap gap-2 text-dark mb-3">
+                      {dataSkill.length > 0 ? (
+                        dataSkill.map((item) => (
+                          <div key={item.id}>
+                            <ListSkill dataSkill={item} />
+                          </div>
+                        ))
+                      ) : (
+                        <div className="text-center">
+                          <h1>You have not any Skill uploaded</h1>
+                        </div>
+                      )}
+                    </div> */}
                     <div className="text-muted mb-2">
                       <img src={mailIcon} alt="" className="icons" />
                       {user.data[0].email ? user.data[0].email : "-"}
@@ -159,37 +141,39 @@ export default function UserProfile() {
                       >
                         {/* Map listPortofolio */}
                         <div className="row bg-white ">
-                          <div className="d-flex flex-row flex-wrap justify-content-evenly gap-5 text-dark">
-                            {/* <div className="col-3"> */}
-                            {portofolio.map((item) => (
-                              <ListPortofolio
-                                key={item.id}
-                                title={item.title}
-                                image={item.image}
-                              />
-                            ))}
-                            {/* </div> */}
+                          <div className="d-flex flex-row flex-wrap justify-content-space text-dark">
+                            {portofolio.data.data.length > 0 ? (
+                              portofolio.data.data.map((item) => (
+                                <div key={item.id} className="col-6">
+                                  <ListPortofolio dataPortofolio={item} />
+                                </div>
+                              ))
+                            ) : (
+                              <div className="text-center">
+                                <h1>You have not any portofolio uploaded</h1>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
+                      {/* Map listExperience */}
                       <div
                         className="tab-pane fade mt-3"
                         id="userExperience"
                         role="tabpanel"
                         aria-labelledby="userExperience-tab"
                       >
-                        {/* Map listExperience */}
-                        {pengalaman.map((item) => (
-                          <ListPengalaman
-                            key={item.id}
-                            company={item.company}
-                            position={item.position}
-                            entryDate={item.entryDate}
-                            exitDate={item.exitDate}
-                            description={item.description}
-                            image={item.image}
-                          />
-                        ))}
+                        {experience.data.data.length > 0 ? (
+                          experience.data.data.map((item) => (
+                            <div key={item.id}>
+                              <ListExperience dataExperience={item} />
+                            </div>
+                          ))
+                        ) : (
+                          <div className="text-center">
+                            <h1>You have not any Experience uploaded</h1>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

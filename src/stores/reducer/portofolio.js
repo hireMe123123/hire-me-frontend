@@ -5,9 +5,9 @@ const initialState = {
   message: "",
 };
 
-const user = (state = initialState, action) => {
+const portofolio = (state = initialState, action) => {
   switch (action.type) {
-    case "GET_DATA_USER_BY_ID_PENDING":
+    case "GET_DATA_PORTOFOLIO_BY_USER_ID_PENDING":
       return {
         ...state,
         data: {},
@@ -16,25 +16,23 @@ const user = (state = initialState, action) => {
         message: "",
       };
 
-    case "GET_DATA_USER_BY_ID_FULFILLED":
+    case "GET_DATA_PORTOFOLIO_BY_USER_ID_FULFILLED":
       return {
         ...state,
         isLoading: false,
         isError: false,
         data: action.payload.data.data,
-        message: action.payload.data.message,
       };
 
-    case "GET_DATA_USER_BY_ID_REJECTED":
+    case "GET_DATA_PORTOFOLIO_BY_USER_ID_REJECTED":
       return {
         ...state,
-        data: {},
         isLoading: false,
         isError: true,
         message: action.payload.response.data,
       };
 
-    case "UPDATE_DATA_USER_PENDING":
+    case "CREATE_PORTOFOLIO_PENDING":
       return {
         ...state,
         isLoading: true,
@@ -42,7 +40,7 @@ const user = (state = initialState, action) => {
         message: "",
       };
 
-    case "UPDATE_DATA_USER_FULFILLED":
+    case "CREATE_PORTOFOLIO_FULFILLED":
       return {
         ...state,
         isLoading: false,
@@ -50,41 +48,18 @@ const user = (state = initialState, action) => {
         message: action.payload.data.message,
       };
 
-    case "UPDATE_DATA_USER_REJECTED":
-      return {
-        ...state,
-        isLoading: true,
-        isError: false,
-        message: action.payload.response.data.message,
-      };
-
-    case "UPDATE_IMAGE_USER_PENDING":
-      return {
-        ...state,
-        isLoading: true,
-        isError: false,
-        message: "",
-      };
-
-    case "UPDATE_IMAGE_USER_FULFILLED":
+    case "CREATE_PORTOFOLIO_REJECTED":
       return {
         ...state,
         isLoading: false,
-        isError: false,
-        message: action.payload.data.message,
-      };
-
-    case "UPDATE_IMAGE_USER_REJECTED":
-      return {
-        ...state,
-        isLoading: true,
-        isError: false,
+        isError: true,
         message: action.payload.response.data.message,
       };
+
     default: {
       return state;
     }
   }
 };
 
-export default user;
+export default portofolio;
