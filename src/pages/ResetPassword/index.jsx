@@ -2,11 +2,12 @@
 import "./index.css";
 import hire from "../../assets/img/hireme.png";
 /* IMPORT AXIOS */
-import axios from "../../utils/axios";
+// import axios from "../../utils/axios";
 
 /* IMPORT IMAGE */
 /* React Function */
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 import React from "react";
 
@@ -15,11 +16,12 @@ export default function ResetPassword() {
     newPassword: "",
     confirmPassword: "",
   });
-
+  const { OTP } = useParams();
   const handleReset = async () => {
     try {
-      const result = await axios.post("auth/resetPassword/OTPReset", form);
-      alert(result.data.msg);
+      console.log(OTP);
+      // const result = await axios.post("auth/resetPassword/OTPReset", form);
+      // alert(result.data.msg);
     } catch (error) {
       alert(error.response.data.msg);
     }
@@ -32,7 +34,7 @@ export default function ResetPassword() {
       {/* START MAIN */}
       <main className="container-auth">
         <div className="row row-auth">
-          <div className="col-sm-6 d-flex justify-content-center align-items-center">
+          <div className="col-md-6 col-sm-12 d-flex justify-content-center align-items-center">
             <div className="bg-image">
               <img src={hire} alt="hire" className="hire-image" />
               <div className="mask"></div>
@@ -44,8 +46,8 @@ export default function ResetPassword() {
               </div>
             </div>
           </div>
-          <div className="col-sm-6 d-flex justify-content-start align-items-center">
-            <header>
+          <div className="col-md-6 col-sm-12 d-flex justify-content-start align-items-center">
+            <header className="right-side">
               <div className="container-auth-right">
                 <h1 className="container-title">Reset password</h1>
                 <p className="text-container">
@@ -71,12 +73,14 @@ export default function ResetPassword() {
                   onChange={handleChangeForm}
                 />{" "}
                 <br />
-                <button
-                  className="btn btn-warning in-button"
-                  onChange={handleReset}
-                >
-                  Reset Password
-                </button>
+                <div className="d-grid">
+                  <button
+                    className="btn btn-warning in-button"
+                    onClick={handleReset}
+                  >
+                    Reset Password
+                  </button>
+                </div>
               </div>
             </header>
           </div>

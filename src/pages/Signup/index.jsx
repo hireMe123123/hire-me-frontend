@@ -4,11 +4,15 @@ import hire from "../../assets/img/hireme.png";
 
 /* IMPORT IMAGE */
 /* React Function */
-// import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
-import axios from "../../utils/axios";
+import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { register } from "../../stores/actions/signup";
 
 export default function Signup() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -16,15 +20,16 @@ export default function Signup() {
     password: "",
     confirmPassword: "",
   });
-  console.log(form);
-
-  const handleSignup = async () => {
-    try {
-      const result = await axios.post("auth/register", form);
-      alert(result.data.message);
-    } catch (error) {
-      alert(error.response.data.message);
-    }
+  const handleNavigate = (nav) => {
+    navigate(`/${nav}`);
+  };
+  const handleSignup = () => {
+    dispatch(register(form))
+      .then((response) => {
+        alert(response.value.data.message);
+        navigate("/signin");
+      })
+      .catch((error) => alert(error));
   };
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -34,7 +39,7 @@ export default function Signup() {
       {/* START MAIN */}
       <main className="container-auth">
         <div className="row row-auth">
-          <div className="col-sm-6 d-flex justify-content-center align-items-center">
+          <div className="col-md-6 col-sm-12 d-flex justify-content-center align-items-center">
             <div className="bg-image">
               <img src={hire} alt="hire" className="hire-image" />
               <div className="mask"></div>
@@ -46,9 +51,9 @@ export default function Signup() {
               </div>
             </div>
           </div>
-          <div className="col-sm-6 d-flex justify-content-start align-items-center">
-            <header>
-              <div className="container-auth-signup">
+          <div className="col-md-6 col-sm-12 d-flex justify-content-start align-items-center">
+            <header className="right-side">
+              <div className="container-auth-right">
                 <h1 className="full-text container-title">Halo, Pewpeople</h1>
                 <h1 className="short-text container-title">Signup</h1>
                 <br />
@@ -105,14 +110,22 @@ export default function Signup() {
                   onChange={handleChangeForm}
                 />{" "}
                 <br />
-                <button
-                  className="btn btn-warning in-button"
-                  onClick={handleSignup}
-                >
-                  Daftar
-                </button>
+                <div className="d-grid">
+                  <button
+                    className="btn btn-warning in-button"
+                    onClick={handleSignup}
+                  >
+                    Daftar
+                  </button>
+                </div>
                 <h4 className="account-check d-flex justify-content-center">
-                  Anda sudah punya akun? <a href="#"> Masuk disini</a>
+                  Anda sudah punya akun?{" "}
+                  <button
+                    className="click-me"
+                    onClick={() => handleNavigate("signin")}
+                  >
+                    Masuk disini
+                  </button>
                 </h4>
               </div>
             </header>

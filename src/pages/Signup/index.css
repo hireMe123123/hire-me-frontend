@@ -52,10 +52,6 @@
   align-items: center !important;
   justify-content: center !important;
 }
-.container-auth-right {
-  margin-top: -200px;
-  padding-bottom: 45px;
-}
 .short-text {
   display: none;
 }
@@ -70,10 +66,7 @@
 }
 
 .text-container {
-  width: 570px;
   height: 50px;
-  left: 795px;
-  top: 205px;
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
@@ -96,9 +89,10 @@
 
   color: #9ea0a5;
 }
+
 .auth-form input {
   box-sizing: border-box;
-  width: 570px;
+  width: 100%;
   height: 50px;
   background: #ffffff;
   border: 1px solid #e2e5ed;
@@ -106,7 +100,7 @@
 }
 
 .in-button {
-  width: 570px;
+  width: 100%;
   height: 50px;
 
   margin-top: 35px;
@@ -128,13 +122,6 @@
 .account-check a {
   text-decoration: none;
   color: #fbb017;
-}
-.change-password {
-  background: #ffffff;
-  width: 600px;
-  height: 707px;
-
-  border-radius: 20px;
 }
 .logo-image {
   background-color: white;
@@ -165,21 +152,16 @@
 .lockpurple {
   background-color: white;
 }
-.change-button-password {
-  width: 204px;
-  height: 36px;
-  margin-top: 20px;
-  margin-bottom: 50px;
-
-  background: #fbb017;
-  border-radius: 4px;
-  color: white;
+.click-me {
+  text-decoration: none;
+  border: none;
+  background-color: #e5e5e5;
+  color: #fbb017;
 }
 @media (max-width: 870px) {
-  .row-auth {
-    flex-direction: row;
-    height: 80vh;
-    margin-right: 65%;
+  .right-side {
+    margin: auto;
+    padding: 0 20px;
   }
   .bg-image {
     display: none;
@@ -193,11 +175,6 @@
   }
 }
 @media (max-width: 576px) {
-  .row-auth {
-    flex-direction: row;
-    height: 80vh;
-    max-width: 20px;
-  }
   .bg-image {
     display: none;
   }
@@ -207,20 +184,5 @@
   }
   .short-text {
     display: inline-block;
-  }
-  .auth-form-text {
-    margin-left: 20px;
-  }
-  .auth-form input {
-    max-width: 80%;
-    margin-left: 20px;
-  }
-  .in-button {
-    max-width: 50%;
-    margin-left: 100px;
-  }
-  .account-check {
-    max-width: 50%;
-    margin-left: 100px;
   }
 }
