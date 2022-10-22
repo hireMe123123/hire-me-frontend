@@ -13,11 +13,8 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import PublicRoute from "./utils/routes/publicRoute";
 import PrivateRoute from "./utils/routes/privateRoute";
-<<<<<<< HEAD
 import SignupCompany from "./pages/SignupCompany";
 import SigninCompany from "./pages/SigninCompany";
-=======
->>>>>>> b55bc885c36b808e5fbcc15987cb29bf4ad6fc90
 
 function App() {
   return (
@@ -29,14 +26,11 @@ function App() {
         {/* PUBLIC ROUTE */}
         <Route element={<PublicRoute />}>
           <Route path="/signin" element={<Signin />} />
-<<<<<<< HEAD
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:OTP" element={<ResetPassword />} />
           <Route path="/signup-company" element={<SignupCompany />} />
           <Route path="/signin-company" element={<SigninCompany />} />
-=======
           <Route path="/signup" element={<Signup />} />
->>>>>>> b55bc885c36b808e5fbcc15987cb29bf4ad6fc90
         </Route>
 
         {/* PRIVATE ROUTE */}
