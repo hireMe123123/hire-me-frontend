@@ -1,14 +1,21 @@
 import React from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import noPhoto from "../../assets/img/no-photo.png";
 import mailIcon from "../../assets/img/icons/mail-icon.png";
 import phoneIcon from "../../assets/img/icons/phone-icon.png";
 import linkedinIcon from "../../assets/img/icons/linkedin-icon.png";
 import instagramIcon from "../../assets/img/icons/instagram-icon.png";
 import "./index.css";
 
+import { useSelector } from "react-redux";
+
 export default function CompanyProfile() {
+  const company = useSelector((state) => state.company);
+
+  const imageCompany = `https://res.cloudinary.com/dihnhvb2q/image/upload/v1666284419/${company.data[0].image}`;
+
+  console.log(imageCompany);
+
   return (
     <div>
       <div>
@@ -22,25 +29,21 @@ export default function CompanyProfile() {
               <div className="container container-company">
                 <div className="d-flex flex-column align-items-center">
                   <img
-                    src={noPhoto}
+                    src={imageCompany}
                     alt=""
                     className="w-25 rounded-circle mb-5"
                   />
-                  <div className="h4">PT. Martabat Jaya Abadi</div>
-                  <div className="h6">Financial</div>
-                  <div className="text-muted mb-5">Jakarta, Indonesia</div>
-                  <div className="text-muted text-center mb-5">
-                    {" "}
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.{" "}
+                  <div className="h4">{company?.data[0]?.name}</div>
+                  <div className="h6">{company?.data[0]?.field}</div>
+                  <div className="text-muted mb-5">
+                    {company?.data[0]?.location}
                   </div>
-                  <button className="btn btn-primary w-25 mb-5">
+                  <div className="text-muted text-center mb-5">
+                    {company?.data[0]?.description
+                      ? company?.data[0]?.description
+                      : "Lorem Ipsum dolat sit amet, consectetur adipiscing elit. Nullam auctor, nunc vel ultricies luctus, nunc nisl aliquet nunc, vel lacinia nisl lorem vel nisl. Nullam auctor, nunc vel ultricies luctus, nunc nisl aliquet nunc, vel lacinia nisl lorem vel nisl."}
+                  </div>
+                  <button className="btn btn-primary w-50 mb-5">
                     Edit Profile
                   </button>
 
@@ -53,11 +56,17 @@ export default function CompanyProfile() {
                     </div>
                     <div className="col-10">
                       <div className="text-muted mb-3">
-                        martabatjaya@gmail.com
+                        {company?.data[0]?.email}
                       </div>
-                      <div className="text-muted mb-3">martabat_jaya</div>
-                      <div className="text-muted mb-3">0812-3456-7889</div>
-                      <div className="text-muted mb-3">Martabat Jaya Abadi</div>
+                      <div className="text-muted mb-3">
+                        {company?.data[0]?.instagram}
+                      </div>
+                      <div className="text-muted mb-3">
+                        {company?.data[0]?.phonenumber}
+                      </div>
+                      <div className="text-muted mb-3">
+                        {company?.data[0]?.linkedin}
+                      </div>
                     </div>
                   </div>
                 </div>

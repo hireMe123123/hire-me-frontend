@@ -11,7 +11,7 @@ export const getDataUser = (page, limit, typeJob, skills, sortSkill) => {
   return {
     type: "GET_DATA_USER",
     payload: axios.get(
-      `api/user/getalluser?page=${page}&limit=${limit}&typeJob=${typeJob}&skills=${skills}&sortSkill=${sortSkill}`
+      `user/getalluser?page=${page}&limit=${limit}&typeJob=${typeJob}&skills=${skills}&sortSkill=${sortSkill}`
     ),
   };
 };

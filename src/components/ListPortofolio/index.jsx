@@ -1,23 +1,17 @@
 import React from "react";
-import noPhoto from "../../assets/img/no-photo.png";
+// import noPhoto from "../../assets/img/no-photo.png";
 
-export default function ListPortofolio() {
+export default function ListPortofolio(props) {
+  const imagePortofolio = ` https://res.cloudinary.com/dihnhvb2q/image/upload/v1666284419/${props.dataPortofolio.image}`;
+
   return (
-    <div>
-      <div className="d-flex flex-row justify-content-evenly gap-5">
-        <div className="col ">
-          <img src={noPhoto} alt="" className="w-100 rounded-3" />
-          <div className="h6 text-center mt-2">Portofolio App</div>
-        </div>
-        <div className="col ">
-          <img src={noPhoto} alt="" className="w-100 rounded-3" />
-          <div className="h6 text-center mt-2">Portofolio App</div>
-        </div>
-        <div className="col ">
-          <img src={noPhoto} alt="" className="w-100 rounded-3" />
-          <div className="h6 text-center mt-2">Portofolio App</div>
+    <>
+      <div className="col-10 ">
+        <img src={imagePortofolio} alt="" className="w-100 rounded-3" />
+        <div className="h6 text-center mt-2">
+          {props.dataPortofolio.projectName}{" "}
         </div>
       </div>
-    </div>
+    </>
   );
 }

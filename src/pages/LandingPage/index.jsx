@@ -11,20 +11,18 @@ import imgOpinion3 from "../../assets/img/img-opinion3.png";
 import ButtonOpinion from "../../components/Buttons/ButtonOpinion";
 import NavbarHeader from "../../components/Navbar";
 import Footer from "../../components/Footer";
-// import bgWave from "../../assets/img/bg-wave.png";
 
 function LandingPage() {
-  const isLogin = false;
   return (
     <>
       <header>
-        <NavbarHeader isLogin={isLogin} />
+        <NavbarHeader />
       </header>
 
-      <main className="mt-5">
+      <main className="mt-5 main-landing">
         <Container>
           <section className="row align-items-center">
-            <div className="col-5">
+            <div className="col-12 col-xxl-5 order-2 order-xxl-1">
               <h1 className="fs-44px lh-base fw-semibold color-bold">
                 Talenta terbaik negeri untuk perubahan revolusi 4.0
               </h1>
@@ -37,16 +35,16 @@ function LandingPage() {
                 classElement={`background-purple text-white fw-bold mt-3`}
               />
             </div>
-            <div className="col text-center">
-              <img src={bgHero} height={580} alt="" />
+            <div className="col-12 col-xxl-7 order-1 order-xxl-2 text-center">
+              <img src={bgHero} height={580} alt="" className="img-fluid" />
             </div>
           </section>
 
           <section className="row" style={{ marginTop: "115px" }}>
-            <div className="col">
-              <img src={bgSection1} height={580} alt="" />
+            <div className="col-12 col-xxl-6">
+              <img src={bgSection1} height={580} alt="" className="img-fluid" />
             </div>
-            <div className="col mt-5">
+            <div className="col-12 col-xxl-6 mt-5">
               <h2 className="fs-1 lh-base mb-4 fw-semibold color-bold">
                 Kenapa harus mencari talent <br /> di peworld
               </h2>
@@ -88,7 +86,10 @@ function LandingPage() {
           </section>
 
           <section className="row" style={{ marginTop: "150px" }}>
-            <div className="col mt-5" style={{ marginLeft: "150px" }}>
+            <div
+              className="col-12 col-xxl-6 order-2 order-xxl-1 mt-5 section2"
+              // style={{ paddingLeft: "150px" }}
+            >
               <h2 className="fs-1 lh-base mb-4 fw-semibold color-bold">
                 Skill Talent
               </h2>
@@ -166,7 +167,7 @@ function LandingPage() {
                 </div>
               </div>
             </div>
-            <div className="col">
+            <div className="col-12 col-xxl-6 order-1 order-xxl-2">
               <img src={bgSection2} className={`img-fluid`} alt="" />
             </div>
           </section>
@@ -177,17 +178,17 @@ function LandingPage() {
             </h2>
 
             <div
-              className="d-flex justify-content-center"
+              className="d-flex flex-column flex-xxl-row justify-content-center"
               style={{ marginTop: "70px" }}
             >
-              <div className="d-flex gap-4 position-relative">
+              <div className="d-flex flex-column flex-xxl-row align-items-center gap-4 position-relative">
                 <ButtonOpinion
                   icon={"dashicons:arrow-left-alt2"}
-                  classElement={"start-0 top-50"}
+                  classElement={"start-0 top-50 button-opinion"}
                 />
                 <ButtonOpinion
                   icon={"dashicons:arrow-right-alt2"}
-                  classElement={"start-100 top-50"}
+                  classElement={"start-100 top-50 button-opinion"}
                 />
                 <CardOpinion
                   img={imgOpinion1}
