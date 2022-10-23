@@ -61,7 +61,7 @@ export default function ResetPassword() {
               <div className="auth-form">
                 <h6 className="auth-form-text">Kata sandi</h6>
                 <input
-                  type="text"
+                  type="password"
                   className="form-control"
                   name="newPassword"
                   placeholder="Masukan kata sandi"
@@ -70,7 +70,7 @@ export default function ResetPassword() {
                 <br />
                 <h6 className="auth-form-text">Konfirmasi kata sandi baru</h6>
                 <input
-                  type="text"
+                  type="password"
                   className="form-control"
                   name="confirmPassword"
                   placeholder="Masukan konfirmasi kata sandi"
