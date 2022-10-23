@@ -10,12 +10,14 @@ import instagramIcon from "../../assets/img/icons/instagram-icon.png";
 import ListSkill from "../../components/ListSkill";
 import "./index.css";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function UserHire() {
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const skill = useSelector((state) => state.skill);
   const userSkill = skill.loadingGet ? "" : skill.data[0].userSkill;
-  const userName = user.data[0]?.name;
+  const userName = user.data[0].name;
 
   const [form, setForm] = useState({
     name: `Hi! ${userName}`,
@@ -38,6 +40,7 @@ export default function UserHire() {
       message: form.message,
     };
     console.log(data);
+    navigate("/chat-company", { state: data });
   };
 
   console.log(form);

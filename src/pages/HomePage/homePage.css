@@ -85,6 +85,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    cursor: pointer;
  }
 
  /* .home__pagination{
