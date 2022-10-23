@@ -25,7 +25,7 @@ export default function ForgotPassword() {
       .then((response) => {
         alert(response.value.data.message);
       })
-      .catch((error) => alert(error));
+      .catch((error) => alert(error.response.data.message));
   };
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
