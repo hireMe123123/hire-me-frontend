@@ -7,22 +7,40 @@ import noPhoto from "../../assets/img/no-photo.png";
 import { Container, NavDropdown, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+// import { getDataUserById } from "../../stores/actions/user";
 
 function NavbarHeader() {
+  //   const dispatch = useDispatch;
   const isLogin = localStorage.getItem("token");
   const [modalShow, setModalShow] = useState(false);
   const [signInShow, setSignInShow] = useState(false);
+  //   const user = useSelector((state) => state.auth);
+  const userCompany = useSelector((state) => state.company);
+  const userJobseeker = useSelector((state) => state.user);
+  const checkData =
+    Object.keys(userCompany.data).length > 0
+      ? userCompany.data[0].image
+      : userJobseeker.data[0].image;
+  const userImage = checkData
+    ? `https://res.cloudinary.com/dihnhvb2q/image/upload/v1666284419/${checkData}`
+    : noPhoto;
+  //   const userImage =
+  //   Object.keys(userCompany.data).length > 0 ?
+  //       userCompany.data[0].image
+  //   ? `https://res.cloudinary.com/dihnhvb2q/image/upload/v1666284419/${userCompany.data[0].image}`
+  //           : Object.keys(userJobseeker.data).length > 0 ?
+  //               userJobseeker.data[0].image
+  //   ? `https://res.cloudinary.com/dihnhvb2q/image/upload/v1666284419/${userJobseeker.data[0].image}`
+  //   : noPhoto;
 
-  const user = useSelector((state) => state.user);
-  const userImage =
-    "https://res.cloudinary.com/dihnhvb2q/image/upload/v1666284419/" +
-    user.data[0]?.image;
+  // "https://res.cloudinary.com/dihnhvb2q/image/upload/v1666284419/" +
+  // user.data[0]?.image;
 
   const handleLogout = () => {
     localStorage.clear();
     window.location.reload();
   };
-
+  console.log(userCompany);
   return (
     <Navbar bg="white" expand="lg" className="my-4">
       <Container>
@@ -46,24 +64,11 @@ function NavbarHeader() {
               <NavDropdown
                 align="end"
                 title={
-                  user.data[0]?.image ? (
-                    <img
-                      src={userImage}
-                      alt="No Photo"
-                      className="rounded-circle"
-                      height={35}
-                    />
-                  ) : (
-                    <img
-                      src={
-                        // `https://ui-avatars.com/api/?name=${user.data[0].name}&background=random&size=44`
-                        noPhoto
-                      }
-                      alt="No Photo"
-                      className="rounded-circle"
-                      height={35}
-                    />
-                  )
+                  <img
+                    src={userImage}
+                    style={{ width: "44px" }}
+                    className="rounded-circle"
+                  ></img>
                 }
                 id="dropdown-menu-align-end"
               >
