@@ -25,9 +25,12 @@ export default function ResetPassword() {
   const { OTPReset } = useParams();
   const handleReset = async () => {
     try {
-      const result = await axios.patch(`auth/resetPassword/${OTPReset}`, form);
+      const result = await axios.patch(
+        `authCompany/resetPassword/${OTPReset}`,
+        form
+      );
       alert(result.data.message);
-      navigate("/signin");
+      navigate("/signin-company");
     } catch (error) {
       alert(error.response.data.message);
     }

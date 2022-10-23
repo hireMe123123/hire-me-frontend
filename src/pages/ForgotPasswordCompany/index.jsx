@@ -1,40 +1,36 @@
 /* IMPORT CSS */
 import "./index.css";
 import hire from "../../assets/img/hireme.png";
-/* IMPORT AXIOS */
-import axios from "../../utils/axios";
 
 /* IMPORT IMAGE */
 import logo from "../../assets/img/logo.png";
 /* React Function */
-import { useState } from "react";
-import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { forgotPasswordCompany } from "../../stores/actions/forgotPasswordCompany";
 
-export default function ResetPassword() {
+export default function ForgotPassword() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
-    newPassword: "",
-    confirmPassword: "",
+    email: "",
   });
-
   const handleNavigate = (nav) => {
     navigate(`/${nav}`);
   };
-  const { OTPReset } = useParams();
-  const handleReset = async () => {
-    try {
-      const result = await axios.patch(`auth/resetPassword/${OTPReset}`, form);
-      alert(result.data.message);
-      navigate("/signin");
-    } catch (error) {
-      alert(error.response.data.message);
-    }
+  const handleForgotPasswordCompany = () => {
+    dispatch(forgotPasswordCompany(form))
+      .then((response) => {
+        alert(response.value.data.message);
+      })
+      .catch((error) => alert(error));
   };
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
   return (
     <>
       {/* START MAIN */}
@@ -45,7 +41,7 @@ export default function ResetPassword() {
               <img src={hire} alt="hire" className="hire-image" />
               <div className="mask"></div>
               <div className="text">
-                <p className="text-p">
+                <p>
                   Temukan developer berbakat & terbaik di berbagai bidang
                   keahlian
                 </p>
@@ -64,35 +60,30 @@ export default function ResetPassword() {
                 />
                 <br />
                 <h1 className="container-title">Reset password</h1>
-                <p className="text-container">
-                  Ubah password untuk mengaktivikasi akun anda kembali
+                <p className="full-text text-container">
+                  Masukan email akun yang sudah terverifikasi dan kami akan
+                  mengirimkan link reset password
+                </p>
+                <p className="short-text text-container">
+                  Masukan email akun anda
                 </p>
               </div>
               <div className="auth-form">
-                <h6 className="auth-form-text">Kata sandi</h6>
+                <h6 className="auth-form-text">Email</h6>
                 <input
-                  type="password"
+                  type="email"
                   className="form-control"
-                  name="newPassword"
-                  placeholder="Masukan kata sandi"
-                  onChange={handleChangeForm}
-                />{" "}
-                <br />
-                <h6 className="auth-form-text">Konfirmasi kata sandi baru</h6>
-                <input
-                  type="password"
-                  className="form-control"
-                  name="confirmPassword"
-                  placeholder="Masukan konfirmasi kata sandi"
+                  name="email"
+                  placeholder="Masukan alamat email"
                   onChange={handleChangeForm}
                 />{" "}
                 <br />
                 <div className="d-grid">
                   <button
                     className="btn btn-warning in-button"
-                    onClick={handleReset}
+                    onClick={handleForgotPasswordCompany}
                   >
-                    Reset Password
+                    Send password reset email
                   </button>
                 </div>
               </div>

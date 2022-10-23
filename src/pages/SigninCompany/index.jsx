@@ -98,7 +98,7 @@ export default function Signin() {
                 <div className="d-flex justify-content-end">
                   <button
                     className="click-me"
-                    onClick={() => handleNavigate("forgot-password")}
+                    onClick={() => handleNavigate("forgot-password-company")}
                   >
                     Lupa kata sandi?
                   </button>
