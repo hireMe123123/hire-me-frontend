@@ -16,14 +16,12 @@ export default function ForgotPassword() {
   const [form, setForm] = useState({
     email: "",
   });
-  // const handleNavigate = (nav) => {
-  //   navigate(`/${nav}`);
-  // };
 
   const handleForgotPasswordUser = () => {
     dispatch(forgotPasswordUser(form))
       .then((response) => {
         alert(response.value.data.message);
+        // navigate("/reset-password/:id");
       })
       .catch((error) => alert(error));
   };
@@ -52,9 +50,12 @@ export default function ForgotPassword() {
             <header className="right-side">
               <div className="container-auth-right">
                 <h1 className="container-title">Reset password</h1>
-                <p className="text-container">
-                  Enter your user account verified email address and we will
-                  send you a password reset link.
+                <p className="full-text text-container">
+                  Masukan email akun yang sudah terverifikasi dan kami akan
+                  mengirimkan link reset password
+                </p>
+                <p className="small-text text-container">
+                  Masukan email untuk mereset akun password
                 </p>
               </div>
               <div className="auth-form">
