@@ -1,0 +1,33 @@
+.chat__background{
+    background: #E5E5E5;;
+}
+
+.chat__navbar{
+    box-shadow: 0px 10px 50px rgba(132, 132, 132, 0.25);
+}
+
+.left__section{
+    background:white;
+    min-height: 600px;
+    max-height: 600px;
+    margin-right: 50px;
+    border-radius: 5px;
+}
+
+.right__section{
+    background:white;
+    min-height: 600px;
+    max-height: 600px;
+    border-radius: 5px;
+}
+
+.chat__container{
+    padding-top: 50px;
+    padding-bottom: 300px;
+}
+
+.left__section h3{
+    margin-top: 20px;
+    margin-left: 10px;
+    font-weight: 600;
+}

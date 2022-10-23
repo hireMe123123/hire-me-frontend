@@ -15,6 +15,7 @@ import PublicRoute from "./utils/routes/publicRoute";
 import PrivateRoute from "./utils/routes/privateRoute";
 import SignupCompany from "./pages/SignupCompany";
 import SigninCompany from "./pages/SigninCompany";
+import ChatPage from "./pages/ChatPage";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
 
         {/* PRIVARE ADMIN ROUTE */}
         <Route element={<PrivateRoute isAdmin={true} />}>
+          <Route path="/chat-company" element={<ChatPage />} />
           <Route path="/company-profile" element={<CompanyProfile />} />
           <Route path="/edit-company" element={<EditProfileCompany />} />
         </Route>
