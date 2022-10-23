@@ -17,6 +17,6 @@ export const updateDataCompany = (companyId, data) => {
 export const updateCompanyImage = (companyId, data) => {
   return {
     type: "UPDATE_IMAGE_COMPANY",
-    payload: axios.patch(`company/image/${companyId}`, data),
+    payload: axios.patch(`company/${companyId}`, data),
   };
 };

@@ -3,20 +3,23 @@ import "./index.css";
 import hire from "../../assets/img/hireme.png";
 
 /* IMPORT IMAGE */
+import logo from "../../assets/img/logo.png";
 /* React Function */
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { forgotPasswordUser } from "../../stores/actions/forgotPasswordUser";
 
 export default function ForgotPassword() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: "",
   });
-
+  const handleNavigate = (nav) => {
+    navigate(`/${nav}`);
+  };
   const handleForgotPasswordUser = () => {
     dispatch(forgotPasswordUser(form))
       .then((response) => {
@@ -49,10 +52,21 @@ export default function ForgotPassword() {
           <div className="col-md-6 col-sm-12 d-flex justify-content-start align-items-center">
             <header className="right-side">
               <div className="container-auth-right">
+                <img
+                  src={logo}
+                  alt="Logo"
+                  height={35}
+                  className="mb-5"
+                  onClick={() => handleNavigate("")}
+                />
+                <br />
                 <h1 className="container-title">Reset password</h1>
                 <p className="full-text text-container">
                   Masukan email akun yang sudah terverifikasi dan kami akan
                   mengirimkan link reset password
+                </p>
+                <p className="short-text text-container">
+                  Masukan email akun anda
                 </p>
               </div>
               <div className="auth-form">

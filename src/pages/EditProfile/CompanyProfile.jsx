@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import people from "../../assets/img/img-opinion3.png";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { Icon } from "@iconify/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getDataCompanyById,
-  // updateCompanyImage,
+  updateCompanyImage,
   updateDataCompany,
 } from "../../stores/actions/company";
 
@@ -15,15 +14,20 @@ export default function EditProfileCompany() {
   const company = useSelector((state) => state.company);
   const dataCompany = company.data[0];
   const [companyData, setCompanyData] = useState(dataCompany);
-  // const [newImage, setNewImage] = useState({});
-  // const [imagePreview, setImagePreview] = useState("");
-  // const lengthImage = Object.keys(newImage).length;
+  const [newImage, setNewImage] = useState({});
+  const [imagePreview, setImagePreview] = useState("");
+  const lengthImage = Object.keys(newImage).length;
 
   const inputData = (e) => {
     const { name, value } = e.target;
     setCompanyData({ ...companyData, [name]: value });
   };
 
+  const handleInputImage = (e) => {
+    const { name, files } = e.target;
+    setNewImage({ [name]: files[0] });
+    setImagePreview(URL.createObjectURL(files[0]));
+  };
   const handleUpdateDataCompany = () => {
     dispatch(updateDataCompany(dataCompany.companyId, companyData)).then(
       (response) => {
@@ -32,17 +36,12 @@ export default function EditProfileCompany() {
       }
     );
   };
-  // const handleInputImage = (e) => {
-  //   const { name, files } = e.target;
-  //   setNewImage({ [name]: files[0] });
-  //   setImagePreview(URL.createObjectURL(files[0]));
-  // };
 
-  // const handleUpdateImage = () => {
-  //   const imageData = new FormData();
-  //   imageData.append("image", newImage.image);
-  //   dispatch(updateCompanyImage(dataCompany.companyId, imageData));
-  // };
+  const handleUpdateImage = () => {
+    const imageData = new FormData();
+    imageData.append("image", newImage.image);
+    dispatch(updateCompanyImage(dataCompany.companyId, imageData));
+  };
   return (
     <>
       <header>
@@ -55,53 +54,82 @@ export default function EditProfileCompany() {
             <div className="container-fluid ">
               <div className="container">
                 <div className="d-flex flex-row align-items-start">
-                  <div className="col-4 me-4">
-                    <div
-                      className="py-5 border rounded rounded-3 bg-white"
-                      style={{ padding: "0px 30px" }}
-                    >
-                      <div className="text-center mb-3">
-                        <img
-                          src={people}
-                          alt=""
-                          className="w-50 rounded-pill"
-                        />
-                      </div>
-                      <div className="text-center mb-5">
-                        <button className="border-0 bg-transparent">
-                          <div className="d-flex align-items-center color-gray gap-2">
-                            <Icon icon={"fa-solid:pen"} />
-                            <span className="fs-5">Edit</span>
+                  <div className="col-12 col-xxl-4 me-xxl-4">
+                    {company.isLoading ? (
+                      <h1>Loading</h1>
+                    ) : (
+                      <div
+                        className="py-5 border rounded rounded-3 bg-white"
+                        style={{ padding: "0px 30px" }}
+                      >
+                        <div className="text-center mb-3">
+                          <img
+                            src={
+                              lengthImage > 0
+                                ? imagePreview
+                                : dataCompany.image
+                                ? `https://res.cloudinary.com/dihnhvb2q/image/upload/v1666284419/${dataCompany.image}`
+                                : "https://res.cloudinary.com/dra4ha50q/image/upload/v1665756702/Wainscot-Event-Organizing/User/default-profile_tw4rl0.png"
+                            }
+                            alt=""
+                            className="w-50 rounded-pill"
+                          />
+                        </div>
+                        <div className="text-center mb-3">
+                          <label
+                            className="border-0 bg-transparent"
+                            htmlFor="image"
+                          >
+                            <input
+                              type="file"
+                              name="image"
+                              id="image"
+                              className="d-none"
+                              onChange={handleInputImage}
+                            />
+                            <div className="d-flex align-items-center color-gray gap-2">
+                              <Icon icon={"fa-solid:pen"} />
+                              <span className="fs-5">Edit</span>
+                            </div>
+                          </label>
+                        </div>
+                        {lengthImage > 0 ? (
+                          <div className="text-center mb-5">
+                            <button
+                              className="button"
+                              onClick={handleUpdateImage}
+                            >
+                              Save
+                            </button>
                           </div>
-                        </button>
-                      </div>
-                      <div className="fw-semibold color-bold h4">
-                        {dataCompany.name
-                          ? dataCompany.name
-                          : "Please add your company name"}
-                      </div>
-                      <div className="color-gray">
-                        {dataCompany.field
-                          ? dataCompany.field
-                          : "Please add your company field"}
-                      </div>
-
-                      <div className="d-flex align-items-center color-gray gap-2 mt-3">
-                        <Icon icon={"akar-icons:location"} width="16" />
-                        <div className="">
+                        ) : (
+                          ""
+                        )}
+                        <div className="fw-semibold color-bold h4">
+                          {dataCompany.name
+                            ? dataCompany.name
+                            : "Please add your company name"}
+                        </div>
+                        <div className="color-gray">
+                          {dataCompany.field
+                            ? dataCompany.field
+                            : "Please add your company field"}
+                        </div>
+                        <div className="d-flex align-items-center color-gray gap-2 mt-3">
+                          <Icon icon={"akar-icons:location"} width="16" />
                           {dataCompany.location
                             ? dataCompany.location
                             : "Please add your company location"}
                         </div>
-                      </div>
 
-                      <div className="color-gray mb-4 mt-3">
-                        {" "}
-                        {dataCompany.description
-                          ? dataCompany.description
-                          : "Please add description about your company"}
+                        <div className="color-gray mb-4 mt-3">
+                          {" "}
+                          {dataCompany.description
+                            ? dataCompany.description
+                            : "Please add description about your company"}
+                        </div>
                       </div>
-                    </div>
+                    )}
 
                     <div className="d-flex flex-column gap-3 mt-4">
                       <button
