@@ -1,5 +1,6 @@
 const initialState = {
   data: {},
+  allData: {},
   pageInfo: {},
   isLoading: false,
   isError: false,
@@ -11,7 +12,7 @@ const user = (state = initialState, action) => {
     case "GET_DATA_USER_PENDING":
       return {
         ...state,
-        data: {},
+        allData: {},
         isLoading: true,
         isError: false,
         message: "",
@@ -22,7 +23,7 @@ const user = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isError: false,
-        data: action.payload.data.data,
+        allData: action.payload.data.data,
         pageInfo: action.payload.data.pagination,
         message: action.payload.data.message,
       };
@@ -30,7 +31,7 @@ const user = (state = initialState, action) => {
     case "GET_DATA_USER_REJECTED":
       return {
         ...state,
-        data: {},
+        allData: {},
         pageInfo: {},
         isLoading: false,
         isError: true,

@@ -14,7 +14,7 @@ import ReactPaginate from "react-paginate";
 
 export default function HomePage() {
   const dispatch = useDispatch();
-  const getEmployee = useSelector((state) => state.user.data);
+  const getEmployee = useSelector((state) => state.user.allData);
   const pageInfo = useSelector((state) => state.user.pageInfo);
   const isLogin = false;
   const [rotate, setRotate] = useState(false);

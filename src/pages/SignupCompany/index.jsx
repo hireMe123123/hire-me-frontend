@@ -65,6 +65,7 @@ export default function SignupCompany() {
                   className="mb-5"
                   onClick={() => handleNavigate("")}
                 />
+                <br />
                 <h1 className="full-text container-title">Halo, Pewpeople</h1>
                 <h1 className="short-text container-title">Signup</h1>
                 <p className="full-text text-container">
@@ -123,16 +124,16 @@ export default function SignupCompany() {
                 <br />
                 <h6 className="auth-form-text">Kata sandi</h6>
                 <input
-                  type="text"
+                  type="password"
                   className="form-control"
                   name="password"
-                  placeholder="Masukan alamat sandi"
+                  placeholder="Masukan kata sandi"
                   onChange={handleChangeForm}
                 />{" "}
                 <br />
                 <h6 className="auth-form-text">Konfirmasi kata sandi</h6>
                 <input
-                  type="text"
+                  type="password"
                   className="form-control"
                   name="confirmPassword"
                   placeholder="Masukan konfirmasi kata sandi"

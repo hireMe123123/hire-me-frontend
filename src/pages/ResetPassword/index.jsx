@@ -5,17 +5,23 @@ import hire from "../../assets/img/hireme.png";
 import axios from "../../utils/axios";
 
 /* IMPORT IMAGE */
+import logo from "../../assets/img/logo.png";
 /* React Function */
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 
 export default function ResetPassword() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     newPassword: "",
     confirmPassword: "",
   });
+
+  const handleNavigate = (nav) => {
+    navigate(`/${nav}`);
+  };
   // const user = useSelector((state) => state.user);
   // console.log(user);
   // useEffect(() => {
@@ -53,6 +59,14 @@ export default function ResetPassword() {
           <div className="col-md-6 col-sm-12 d-flex justify-content-start align-items-center">
             <header className="right-side">
               <div className="container-auth-right">
+                <img
+                  src={logo}
+                  alt="Logo"
+                  height={35}
+                  className="mb-5"
+                  onClick={() => handleNavigate("")}
+                />
+                <br />
                 <h1 className="container-title">Reset password</h1>
                 <p className="text-container">
                   Ubah password untuk mengaktivikasi akun anda kembali
@@ -61,7 +75,7 @@ export default function ResetPassword() {
               <div className="auth-form">
                 <h6 className="auth-form-text">Kata sandi</h6>
                 <input
-                  type="text"
+                  type="password"
                   className="form-control"
                   name="newPassword"
                   placeholder="Masukan kata sandi"
@@ -70,7 +84,7 @@ export default function ResetPassword() {
                 <br />
                 <h6 className="auth-form-text">Konfirmasi kata sandi baru</h6>
                 <input
-                  type="text"
+                  type="password"
                   className="form-control"
                   name="confirmPassword"
                   placeholder="Masukan konfirmasi kata sandi"
