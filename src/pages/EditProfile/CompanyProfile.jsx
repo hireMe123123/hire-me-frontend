@@ -6,6 +6,7 @@ import { Icon } from "@iconify/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getDataCompanyById,
+  // updateCompanyImage,
   updateDataCompany,
 } from "../../stores/actions/company";
 
@@ -14,6 +15,9 @@ export default function EditProfileCompany() {
   const company = useSelector((state) => state.company);
   const dataCompany = company.data[0];
   const [companyData, setCompanyData] = useState(dataCompany);
+  // const [newImage, setNewImage] = useState({});
+  // const [imagePreview, setImagePreview] = useState("");
+  // const lengthImage = Object.keys(newImage).length;
 
   const inputData = (e) => {
     const { name, value } = e.target;
@@ -28,7 +32,17 @@ export default function EditProfileCompany() {
       }
     );
   };
+  // const handleInputImage = (e) => {
+  //   const { name, files } = e.target;
+  //   setNewImage({ [name]: files[0] });
+  //   setImagePreview(URL.createObjectURL(files[0]));
+  // };
 
+  // const handleUpdateImage = () => {
+  //   const imageData = new FormData();
+  //   imageData.append("image", newImage.image);
+  //   dispatch(updateCompanyImage(dataCompany.companyId, imageData));
+  // };
   return (
     <>
       <header>
