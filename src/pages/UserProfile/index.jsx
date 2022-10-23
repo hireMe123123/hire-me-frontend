@@ -64,7 +64,10 @@ export default function UserProfile() {
                         ? user.data[0]?.description
                         : " Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum ea saepe sit ea fuga quisquam architecto atque nostrum minus facilis repellendus laboriosam beatae ut dolor aspernatur! Aliquam labore at beatae. Ut cupiditate quaerat aperiam delectus impedit neque officiis repellat iure sit animi nulla natus tension! Eaque totam error occaecati, quaerat itaque nostrum. Sequi rerum voluptate eveniet necessitatibus."}
                     </div>
-                    <button className="btn w-100 background-purple mb-4 text-white">
+                    <button
+                      className="btn w-100 background-purple mb-4 text-white"
+                      hidden={Object.keys(user.data).length > 0 ? true : false}
+                    >
                       Hire
                     </button>
                     {/* <div className="fw-bold h5">Skill</div>

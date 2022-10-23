@@ -81,7 +81,9 @@ export default function EditProfileUser() {
   const handleUpdateImage = () => {
     const imageData = new FormData();
     imageData.append("image", newImage.image);
-    dispatch(updateUserImage(dataUser.userId, imageData));
+    dispatch(updateUserImage(dataUser.userId, imageData)).then(() => {
+      dispatch(getDataUserById(dataUser.userId));
+    });
   };
 
   return (

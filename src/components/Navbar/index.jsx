@@ -20,7 +20,9 @@ function NavbarHeader() {
   const checkData =
     Object.keys(userCompany.data).length > 0
       ? userCompany.data[0].image
-      : userJobseeker.data[0].image;
+      : Object.keys(userJobseeker.data).length > 0
+      ? userJobseeker.data[0].image
+      : false;
   const userImage = checkData
     ? `https://res.cloudinary.com/dihnhvb2q/image/upload/v1666284419/${checkData}`
     : noPhoto;
@@ -40,7 +42,6 @@ function NavbarHeader() {
     localStorage.clear();
     window.location.reload();
   };
-  console.log(userCompany);
   return (
     <Navbar bg="white" expand="lg" className="my-4">
       <Container>
