@@ -63,6 +63,7 @@ export default function Signup() {
                   className="mb-5"
                   onClick={() => handleNavigate("")}
                 />
+                <br />
                 <h1 className="full-text container-title">Halo, Pewpeople</h1>
                 <h1 className="short-text container-title">Signup</h1>
                 <br />

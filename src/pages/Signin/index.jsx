@@ -69,6 +69,7 @@ export default function Signin() {
                   className="mb-5"
                   onClick={() => handleNavigate("")}
                 />
+                <br />
                 <h1 className="full-text container-title">Halo, Pewpeople</h1>
                 <h1 className="short-text container-title">Signin</h1>
                 <p className="full-text text-container">
