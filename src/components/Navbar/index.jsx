@@ -1,13 +1,17 @@
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import logo from "../../assets/img/logo.png";
-import ButtonSmall from "../../components/Buttons/ButtonSmall";
-import { Container, NavDropdown } from "react-bootstrap";
+import SigninModal from "../AuthModal/Signin";
+import SignupModal from "../AuthModal/Signup";
 import noPhoto from "../../assets/img/no-photo.png";
+import { Container, NavDropdown, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 function NavbarHeader() {
   const isLogin = localStorage.getItem("token");
+  const [modalShow, setModalShow] = useState(false);
+  const [signInShow, setSignInShow] = useState(false);
 
   const user = useSelector((state) => state.user);
   const userImage =
@@ -86,7 +90,31 @@ function NavbarHeader() {
             </>
           ) : (
             <>
-              <ButtonSmall
+              <Button
+                variant="light"
+                onClick={() => setSignInShow(true)}
+                className="color-purple border-purple me-3 fw-bold"
+              >
+                Masuk
+              </Button>
+              <SigninModal
+                show={signInShow}
+                onHide={() => setSignInShow(false)}
+              />
+
+              <Button
+                onClick={() => setModalShow(true)}
+                className="text-white background-purple border-purple fw-bold"
+                style={{ backgroundColor: "#5e50a1" }}
+              >
+                Daftar
+              </Button>
+              <SignupModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+              />
+
+              {/* <ButtonSmall
                 content={"Masuk"}
                 classElement={"color-purple border-purple me-3 fw-bold"}
                 navigateAuth={"signin"}
@@ -95,7 +123,7 @@ function NavbarHeader() {
                 content={"Daftar"}
                 classElement={"text-white background-purple fw-bold"}
                 navigateAuth={"signup"}
-              />
+              /> */}
             </>
           )}
         </Navbar.Collapse>
