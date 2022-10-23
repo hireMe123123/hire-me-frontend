@@ -54,9 +54,6 @@ export default function ForgotPassword() {
                   Masukan email akun yang sudah terverifikasi dan kami akan
                   mengirimkan link reset password
                 </p>
-                <p className="small-text text-container">
-                  Masukan email untuk mereset akun password
-                </p>
               </div>
               <div className="auth-form">
                 <h6 className="auth-form-text">Email</h6>
