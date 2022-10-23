@@ -21,6 +21,7 @@ export default function UserProfile() {
   const portofolio = useSelector((state) => state.portofolio);
   const experience = useSelector((state) => state.experience);
   const skill = useSelector((state) => state.skill);
+  const company = useSelector((state) => state.company);
   const userSkill = skill.loadingGet ? "" : skill.data[0].userSkill;
 
   const navigate = useNavigate();
@@ -30,6 +31,11 @@ export default function UserProfile() {
     navigate("/user-hire");
     dispatch(getDataUserById(user.data[0].userId));
   };
+
+  const checkDataUser =
+    Object.keys(company.data).length > 0 ? "Company" : "User";
+
+  console.log(checkDataUser);
 
   return (
     <div>
@@ -78,7 +84,7 @@ export default function UserProfile() {
                     </div>
                     <button
                       className="btn w-100 background-purple mb-4 text-white"
-                      hidden={Object.keys(user.data).length > 0 ? true : false}
+                      hidden={checkDataUser === "Company" ? false : true}
                       onClick={handleHire}
                     >
                       Hire
