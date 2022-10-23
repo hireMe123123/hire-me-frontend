@@ -28,7 +28,7 @@ function App() {
         <Route element={<PublicRoute />}>
           <Route path="/signin" element={<Signin />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password/:OTP" element={<ResetPassword />} />
+          <Route path="/resetpassword/:OTPReset" element={<ResetPassword />} />
           <Route path="/signup-company" element={<SignupCompany />} />
           <Route path="/signin-company" element={<SigninCompany />} />
           <Route path="/signup" element={<Signup />} />
