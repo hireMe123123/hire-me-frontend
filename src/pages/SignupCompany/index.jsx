@@ -33,7 +33,7 @@ export default function SignupCompany() {
         alert(response.value.data.message);
         navigate("/signin-company");
       })
-      .catch((error) => alert(error));
+      .catch((error) => alert(error.response.data.message));
   };
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
