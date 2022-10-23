@@ -22,7 +22,6 @@ export default function Card(props) {
     dispatch(getDataPortofolioByUserId(props.userId));
   };
 
-  console.log(props);
   return (
     <>
       <div className="card" onClick={handleNavigate}>
