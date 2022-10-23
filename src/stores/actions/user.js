@@ -7,10 +7,12 @@ export const getDataUserById = (id) => {
   };
 };
 
-export const getDataUser = () => {
+export const getDataUser = (page, limit, typeJob, skills, sortSkill) => {
   return {
     type: "GET_DATA_USER",
-    payload: axios.get("/user/getalluser"),
+    payload: axios.get(
+      `user/getalluser?page=${page}&limit=${limit}&typeJob=${typeJob}&skills=${skills}&sortSkill=${sortSkill}`
+    ),
   };
 };
 

@@ -65,10 +65,14 @@ export default function Signin() {
                   className="mb-5"
                   onClick={() => handleNavigate("")}
                 />
-                <h1 className="container-title">Halo, Pewpeople</h1>
-                <p className="text-container">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-                  euismod ipsum et dui rhoncus auctor
+                <h1 className="full-text container-title">Halo, Pewpeople</h1>
+                <h1 className="short-text container-title">Signin</h1>
+                <p className="full-text text-container">
+                  Selamat datang Pewpeople, Masukan email dan kata sandi untuk
+                  segera terhubung <br /> dengan tenaga kerja berkualitas
+                </p>
+                <p className="short-text text-container">
+                  Selamat datang Pewpeole, masukan email dan kata sandi
                 </p>
               </div>
               <div className="auth-form">
@@ -90,12 +94,14 @@ export default function Signin() {
                   onChange={handleChangeForm}
                 />{" "}
                 <br />
-                <h5
-                  className="d-flex justify-content-end"
-                  onClick={() => handleNavigate("forgot-password")}
-                >
-                  Lupa kata sandi?
-                </h5>
+                <div className="d-flex justify-content-end">
+                  <button
+                    className="click-me"
+                    onClick={() => handleNavigate("forgot-password")}
+                  >
+                    Lupa kata sandi?
+                  </button>
+                </div>
                 <div className="d-grid">
                   <button
                     className="btn btn-warning in-button"
@@ -108,7 +114,7 @@ export default function Signin() {
                   Anda belum punya akun?{" "}
                   <button
                     className="click-me"
-                    onClick={() => handleNavigate("signup")}
+                    onClick={() => handleNavigate("signup-company")}
                   >
                     Daftar disini
                   </button>
