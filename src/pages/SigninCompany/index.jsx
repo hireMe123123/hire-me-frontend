@@ -78,7 +78,7 @@ export default function Signin() {
                 <br />
                 <h6 className="auth-form-text">Kata Sandi</h6>
                 <input
-                  type="text"
+                  type="password"
                   className="form-control"
                   name="password"
                   placeholder="Masukan alamat sandi"
