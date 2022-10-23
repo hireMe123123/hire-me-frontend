@@ -51,7 +51,7 @@ export default function ResetPassword() {
               <div className="container-auth-right">
                 <h1 className="container-title">Reset password</h1>
                 <p className="text-container">
-                  You need to change your password to activate your account
+                  Ubah password untuk mengaktivikasi akun anda kembali
                 </p>
               </div>
               <div className="auth-form">
@@ -64,7 +64,7 @@ export default function ResetPassword() {
                   onChange={handleChangeForm}
                 />{" "}
                 <br />
-                <h6 className="auth-form-text">Confirmation new password</h6>
+                <h6 className="auth-form-text">Konfirmasi kata sandi baru</h6>
                 <input
                   type="text"
                   className="form-control"

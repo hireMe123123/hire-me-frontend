@@ -58,10 +58,13 @@ export default function Signup() {
                 <h1 className="short-text container-title">Signup</h1>
                 <br />
                 <p className="full-text text-container">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-                  euismod ipsum et dui rhoncus auctor
+                  Selamat datang di Peworld. Silahkan isi form berikut untuk
+                  tergabung <br />
+                  dalam aplikasi kami
                 </p>
-                <p className="short-text text-container">Lorememe</p>
+                <p className="short-text text-container">
+                  Silahkan isi form berikut untuk mendaftar
+                </p>
               </div>
               <br />
               <div className="auth-form">
@@ -125,6 +128,15 @@ export default function Signup() {
                     onClick={() => handleNavigate("signin")}
                   >
                     Masuk disini
+                  </button>
+                </h4>
+                <h4 className="account-check d-flex justify-content-center">
+                  Atau masuk disini{" "}
+                  <button
+                    className="click-me"
+                    onClick={() => handleNavigate("signin-company")}
+                  >
+                    Sebagai perusahaan
                   </button>
                 </h4>
               </div>
