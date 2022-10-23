@@ -7,7 +7,7 @@ import githubIcon from "../../assets/img/icons/github-icon.png";
 import gitlabIcon from "../../assets/img/icons/gitlab-icon.png";
 import ListPortofolio from "../../components/ListPortofolio";
 import ListExperience from "../../components/ListExperience";
-// import ListSkill from "../../components/ListSkill";
+import ListSkill from "../../components/ListSkill";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import "./index.css";
@@ -18,6 +18,8 @@ export default function UserProfile() {
   const user = useSelector((state) => state.user);
   const portofolio = useSelector((state) => state.portofolio);
   const experience = useSelector((state) => state.experience);
+  const skill = useSelector((state) => state.skill);
+  const userSkill = skill.loadingGet ? "" : skill.data[0].userSkill;
 
   return (
     <div>
@@ -70,12 +72,12 @@ export default function UserProfile() {
                     >
                       Hire
                     </button>
-                    {/* <div className="fw-bold h5">Skill</div>
+                    <div className="fw-bold h5">Skill</div>
                     <div className="d-flex flex-row flex-wrap gap-2 text-dark mb-3">
-                      {dataSkill.length > 0 ? (
-                        dataSkill.map((item) => (
-                          <div key={item.id}>
-                            <ListSkill dataSkill={item} />
+                      {userSkill.length > 0 ? (
+                        userSkill.map((item) => (
+                          <div key={item.userSkillId}>
+                            <ListSkill dataSkill={item.skill} />
                           </div>
                         ))
                       ) : (
@@ -83,7 +85,7 @@ export default function UserProfile() {
                           <h1>You have not any Skill uploaded</h1>
                         </div>
                       )}
-                    </div> */}
+                    </div>
                     <div className="text-muted mb-2">
                       <img src={mailIcon} alt="" className="icons" />
                       {user.data[0]?.email ? user.data[0]?.email : "-"}
