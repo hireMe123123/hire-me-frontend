@@ -5,8 +5,13 @@ import Footer from "../../components/Footer";
 import pinIcon from "../../assets/img/icons/pin-icon.png";
 import phoneIcon from "../../assets/img/icons/phone-icon.png";
 import "./index.css";
+import { useSelector } from "react-redux";
 
 export default function UserHire() {
+  const user = useSelector((state) => state.user);
+
+  console.log(user);
+
   return (
     <div>
       {/* Header */}
