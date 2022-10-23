@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+<h1 align='center'>Hire-Me</h1>
+  <p align="center">
+    <a href="link_deploy">View Demo</a>
+    ·
+    <a href="https://github.com/usergithub/hire-me-backend/issues">Report Bug Backend</a>
+    ·
+    <a href="https://github.com/hireMe123123/hire-me-frontend/issues">Report Bug Frontend</a>
+    ·
+    <a href="https://github.com/usergithub/hire-me-backend/pulls">Request Feature Backend</a>
+    ·
+    <a href="https://github.com/hireMe123123/hire-me-frontend/pulls">Request Feature Frontend</a>
+  </p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<center>
 
-## Available Scripts
+![Image Banner](src/assets/img/hireme-app.png)
 
-In the project directory, you can run:
+</center>
 
-### `npm start`
+## About The Project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The app where you can connect to hundreds of top company. Easy way to find best employee to work on your company.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Built With
 
-### `npm test`
+[![React](https://img.shields.io/badge/React-v17.0.2-blue)](https://github.com/facebook/react)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-v4.6.x-blue)](https://github.com/react-bootstrap/react-bootstrap)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Requirements
 
-### `npm run build`
+1. <a href="https://nodejs.org/en/download/">Node Js</a>
+2. Node_modules `npm install` or `yarn install`
+3. Backend API #Hire-me [`here`](https://github.com/hireMe123123/hire-me-backend)
+4. Frontend #Hire-me [`here`](https://github.com/hireMe123123/hire-me-frontend)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Download this Project or you can type `git clone https://github.com/hireMe123123/hire-me-backend.git`
+2. Open app's directory in CMD or Terminal
+3. Type `npm install` or `yarn install`
+4. Add .env file at root folder project
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+REACT_APP_ENDPOINT = [Backend API]
 
-### `npm run eject`
+5. Type `npm run dev`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Acknowledgements
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [Axios](https://www.npmjs.com/package/axios)
+- [Cloudinary](https://cloudinary.com/)
+- [Express](https://www.express.com)
+- [React](https://reactjs.org/)
+- [React Bootstrap](https://react-bootstrap.github.io/)
+- [Redis](https://redis.com/)
+- [Redux](https://redux.js.org/)
+- [Supabase](https://supabase.com/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Team - untuk project team
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+© [Hire-Me](https://github.com/hireMe123123)
 
-## Learn More
+> All Members of Default Team
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+|          <a href="https://github.com/azkar-sh" target="_blank">**Full-Stack Developer & Team Leader**</a>          |                 <a href="https://github.com/KevinReyhanW" target="_blank">**Front-End Developer**</a>                  |                 <a href="https://github.com/mabdullah12101" target="_blank">**Front-End Developer**</a>                  |                 <a href="https://github.com/rizkyark" target="_blank">**Front-End Developer**</a>                  |                 <a href="https://github.com/saintrosid21" target="_blank">**Back-End Developer**</a>                  |                      <a href="https://github.com/Fhmi00" target="_blank">**Back-End Developer**</a>                       |               <a href="https://github.com/ahmaddhohirazhari" target="_blank">**Back-End Developer**</a>               |
+| :----------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------: |
+| [![Full-Stack Developer Image](https://avatars.githubusercontent.com/u/74675235?v=4)](https://github.com/azkar-sh) | [![Front-End Developer Image](https://avatars.githubusercontent.com/u/109788771?v=4)](https://github.com/KevinReyhanW) | [![Front-End Developer Image](https://avatars.githubusercontent.com/u/111334061?v=4)](https://github.com/mabdullah12101) | [![Front-End Developer Image](https://avatars.githubusercontent.com/u/101084270?v=4)](https://github.com/rizkyark) | [![Back-End Developer Image](https://avatars.githubusercontent.com/u/110646618?v=4)](https://github.com/saintrosid21) | [![Back-End Developer Image](https://avatars.githubusercontent.com/u/88100780?v=4)](https://github.com/ahmaddhohirazhari) | [![Back-End Developer Image](https://avatars.githubusercontent.com/u/101547733?s=400&v=4)](https://github.com/Fhmi00) |
+|              <a href="https://github.com/azkar-sh" target="_blank">`https://github.com/azkar-sh`</a>               |            <a href="https://github.com/KevinReyhanW" target="_blank">`https://github.com/KevinReyhanW`</a>             |           <a href="https://github.com/mabdullah12101" target="_blank">`https://github.com/mabdullah12101`</a>            |              <a href="https://github.com/rizkyark" target="_blank">`https://github.com/rizkyark`</a>               |            <a href="https://github.com/saintrosid21" target="_blank">`https://github.com/saintrosid21`</a>            |         <a href="https://github.com/ahmaddhohirazhari" target="_blank">`https://github.com/ahmaddhohirazhari`</a>         |                  <a href="https://github.com/Fhmi00" target="_blank">`https://github.com/Fhmi00`</a>                  |
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
