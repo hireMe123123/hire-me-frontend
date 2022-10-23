@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { getDataUserById } from "../../stores/actions/user";
 import { getDataExperienceByUserId } from "../../stores/actions/experience";
 import { getDataPortofolioByUserId } from "../../stores/actions/portofolio";
+import { getDataSkillByUserId } from "../../stores/actions/skill";
 
 export default function Signin() {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ export default function Signin() {
       .then((response) => {
         alert(response.value.data.message);
         dispatch(getDataUserById(response.value.data.data.userId));
+        dispatch(getDataSkillByUserId(response.value.data.data.userId));
         dispatch(getDataExperienceByUserId(response.value.data.data.userId));
         dispatch(getDataPortofolioByUserId(response.value.data.data.userId));
         localStorage.setItem("token", response.value.data.data.token);
