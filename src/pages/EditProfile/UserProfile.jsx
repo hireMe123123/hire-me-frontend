@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import people from "../../assets/img/img-opinion3.png";
+import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { Icon } from "@iconify/react";
@@ -236,12 +236,17 @@ export default function EditProfileUser() {
                         user.isLoading ? "d-none" : "d-flex"
                       } flex-column gap-3 mt-4`}
                     >
-                      <button className="button button_base fw-bold background-purple text-white">
-                        Ubah Password
-                      </button>
-                      <button className="button button_base fw-bold border-purple color-purple">
-                        Kembali
-                      </button>
+                      <Link to={"/forgot-password"}>
+                        <button className="button button_base fw-bold background-purple text-white w-100">
+                          Ubah Password
+                        </button>
+                      </Link>
+
+                      <Link to={"/"} className="">
+                        <button className="button button_base fw-bold border-purple color-purple w-100">
+                          Kembali
+                        </button>
+                      </Link>
                     </div>
                   </div>
 

@@ -38,6 +38,9 @@ function NavbarHeader() {
   // "https://res.cloudinary.com/dihnhvb2q/image/upload/v1666284419/" +
   // user.data[0]?.image;
 
+  const checkDataUser =
+    Object.keys(userCompany.data).length > 0 ? "Company" : "User";
+
   const handleLogout = () => {
     localStorage.clear();
     window.location.reload();
@@ -62,31 +65,64 @@ function NavbarHeader() {
                   Home
                 </Nav.Link>
               </Nav>
-              <NavDropdown
-                align="end"
-                title={
-                  <img
-                    src={userImage}
-                    style={{ width: "44px" }}
-                    className="rounded-circle"
-                  ></img>
-                }
-                id="dropdown-menu-align-end"
-              >
-                <NavDropdown.Item href="/user-profile">
-                  Detail Profile
-                </NavDropdown.Item>
-                <NavDropdown.Item href="/edit-user">
-                  Edit Profile
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item
-                  className="text-danger"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
+
+              {checkDataUser === "Company" ? (
+                <>
+                  <NavDropdown
+                    align="end"
+                    title={
+                      <img
+                        src={userImage}
+                        style={{ width: "44px" }}
+                        className="rounded-circle"
+                      ></img>
+                    }
+                    id="dropdown-menu-align-end"
+                  >
+                    <NavDropdown.Item href="/company-profile">
+                      Detail Profile Company
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="/edit-company">
+                      Edit Profile Company
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item
+                      className="text-danger"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </>
+              ) : (
+                <>
+                  <NavDropdown
+                    align="end"
+                    title={
+                      <img
+                        src={userImage}
+                        style={{ width: "44px" }}
+                        className="rounded-circle"
+                      ></img>
+                    }
+                    id="dropdown-menu-align-end"
+                  >
+                    <NavDropdown.Item href="/user-profile">
+                      Detail Profile
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="/edit-user">
+                      Edit Profile
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item
+                      className="text-danger"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </>
+              )}
 
               {/* <ButtonSmall
                 content={"Profile"}
