@@ -2,7 +2,7 @@
 import "./index.css";
 import hire from "../../assets/img/hireme.png";
 /* IMPORT AXIOS */
-// import axios from "../../utils/axios";
+import axios from "../../utils/axios";
 
 /* IMPORT IMAGE */
 /* React Function */
@@ -16,12 +16,16 @@ export default function ResetPassword() {
     newPassword: "",
     confirmPassword: "",
   });
-  const { OTP } = useParams();
+  // const user = useSelector((state) => state.user);
+  // console.log(user);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
+  const { OTPReset } = useParams();
   const handleReset = async () => {
     try {
-      console.log(OTP);
-      // const result = await axios.post("auth/resetPassword/OTPReset", form);
-      // alert(result.data.msg);
+      const result = await axios.patch(`auth/resetPassword/${OTPReset}`, form);
+      alert(result.data.message);
     } catch (error) {
       alert(error.response.data.message);
     }

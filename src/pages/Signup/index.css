@@ -175,6 +175,9 @@
   }
 }
 @media (max-width: 576px) {
+  .container-auth-signup-company {
+    height: 150vh;
+  }
   .bg-image {
     display: none;
   }
