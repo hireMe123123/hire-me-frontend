@@ -33,6 +33,7 @@ function LandingPage() {
               <ButtonMedium
                 content={"Mulai Dari Sekarang"}
                 classElement={`background-purple text-white fw-bold mt-3`}
+                navigateAuth={"signin"}
               />
             </div>
             <div className="col-12 col-xxl-7 order-1 order-xxl-2 text-center">
@@ -225,6 +226,7 @@ function LandingPage() {
                 <ButtonMedium
                   content={"Mulai Dari Sekarang"}
                   classElement={`bg-white color-purple fw-bold mt-3`}
+                  navigateAuth={"signin"}
                 />
               </div>
             </div>

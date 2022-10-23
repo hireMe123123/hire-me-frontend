@@ -130,6 +130,7 @@ export default function HomePage() {
             {getEmployee.length > 0 ? (
               getEmployee.map((i) => (
                 <Card
+                  userId={i.userId}
                   name={i.name}
                   job={i.profession}
                   jobType={i.typeJob}
