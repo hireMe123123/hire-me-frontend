@@ -17,22 +17,43 @@ import {
   createPortofolio,
   getDataPortofolioByUserId,
 } from "../../stores/actions/portofolio";
+import {
+  createSkill,
+  deleteSkill,
+  getDataSkillByUserId,
+  updateSkill,
+} from "../../stores/actions/skill";
+import { Spinner } from "react-bootstrap";
 
 export default function EditProfileUser() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const skill = useSelector((state) => state.skill);
+  const userSkill = skill.loadingGet ? "" : skill.data[0].userSkill;
+  // const [formSkillUpdate, setFormSkillUpdate] = useState();
   const dataUser = user.data[0];
   const [userData, setUserData] = useState(dataUser);
   const [experience, setExperience] = useState({ userId: dataUser?.userId });
   const [portofolio, setPortofolio] = useState({ userId: dataUser?.userId });
+  const [inputSkill, setInputSkill] = useState({ userId: dataUser?.userId });
+  const [updateSkillUser, setUpdateSkillUser] = useState();
   const [newImage, setNewImage] = useState({});
   const [imagePreview, setImagePreview] = useState("");
   const lengthImage = Object.keys(newImage).length;
-  // console.log(imagePreview);
 
   const inputData = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
+  };
+
+  const handleInputSkill = (e) => {
+    const { name, value } = e.target;
+    setInputSkill({ ...inputSkill, [name]: value });
+  };
+
+  const handleInputUpdateSkill = (e) => {
+    const { name, value } = e.target;
+    setUpdateSkillUser({ ...updateSkillUser, [name]: value });
   };
 
   const inputExperience = (e) => {
@@ -59,6 +80,28 @@ export default function EditProfileUser() {
   const handleUpdateDataUser = () => {
     dispatch(updateDataUser(dataUser.userId, userData)).then(() => {
       dispatch(getDataUserById(dataUser.userId));
+    });
+  };
+
+  const handleCreateSkill = () => {
+    dispatch(createSkill(inputSkill)).then(() => {
+      dispatch(getDataSkillByUserId(dataUser.userId));
+      setInputSkill("");
+    });
+  };
+
+  const handleDeleteSkill = (skillId) => {
+    dispatch(deleteSkill(skillId)).then(() => {
+      dispatch(getDataSkillByUserId(dataUser.userId));
+    });
+  };
+
+  const handleUpdateSkill = () => {
+    dispatch(
+      updateSkill(updateSkillUser.userSkillId, { skill: updateSkillUser.skill })
+    ).then(() => {
+      dispatch(getDataSkillByUserId(dataUser.userId));
+      setUpdateSkillUser("");
     });
   };
 
@@ -100,7 +143,7 @@ export default function EditProfileUser() {
                 <div className="d-flex flex-column flex-xxl-row align-items-start">
                   <div className="col-12 col-xxl-4 me-xxl-4">
                     {user.isLoading ? (
-                      <h1>Loading</h1>
+                      <Spinner animation="border" variant="light" />
                     ) : (
                       <div
                         className="py-5 border rounded rounded-3 bg-white"
@@ -188,7 +231,11 @@ export default function EditProfileUser() {
                       </div>
                     )}
 
-                    <div className="d-flex flex-column gap-3 mt-4">
+                    <div
+                      className={`${
+                        user.isLoading ? "d-none" : "d-flex"
+                      } flex-column gap-3 mt-4`}
+                    >
                       <button className="button button_base fw-bold background-purple text-white">
                         Ubah Password
                       </button>
@@ -335,28 +382,76 @@ export default function EditProfileUser() {
                           action=""
                           className="mt-5 d-flex flex-column gap-4"
                         >
-                          <div className="d-flex input_style gap-5">
+                          <div className={`d-flex input_style gap-5`}>
                             <input
                               type="text"
-                              id="skillName"
-                              name="skillName"
+                              id="skill"
+                              name="skill"
                               placeholder="Java"
                               className="w-100"
+                              onChange={handleInputSkill}
                             />
-                            <button className="button_save">Simpan</button>
+                            <button
+                              type="button"
+                              className="button_save"
+                              onClick={handleCreateSkill}
+                            >
+                              Tambah
+                            </button>
                           </div>
 
-                          <div className="button button-list-skill text-white text-start d-flex align-items-center justify-content-between">
-                            <span>Phyton</span>
-                            <div className="d-flex gap-1">
-                              <button className="button p-0 text-white">
-                                <Icon icon={"la:pen"} width={"15"} />
-                              </button>
-                              <button className="button p-0 text-white">
-                                <Icon icon={"bi:trash"} width={"15"} />
-                              </button>
-                            </div>
+                          <div className={`d-flex input_style gap-5`}>
+                            <input
+                              type="text"
+                              id="skill"
+                              name="skill"
+                              className="w-100"
+                              onChange={handleInputUpdateSkill}
+                              value={
+                                updateSkillUser ? updateSkillUser.skill : ""
+                              }
+                            />
+                            <button
+                              type="button"
+                              className="button_save"
+                              onClick={handleUpdateSkill}
+                            >
+                              Simpan
+                            </button>
                           </div>
+
+                          {skill.loadingGet ? (
+                            <Spinner animation="border" variant="primary" />
+                          ) : (
+                            <div className="d-flex flex-wrap gap-3">
+                              {userSkill.map((item) => (
+                                <div
+                                  className="button button-list-skill text-white text-start d-flex align-items-center justify-content-between gap-4"
+                                  key={item.userSkillId}
+                                >
+                                  <span>{item.skill}</span>
+                                  <div className="d-flex gap-1">
+                                    <button
+                                      type="button"
+                                      className="button p-0 text-white"
+                                      onClick={() => setUpdateSkillUser(item)}
+                                    >
+                                      <Icon icon={"la:pen"} width={"15"} />
+                                    </button>
+                                    <button
+                                      type="button"
+                                      className="button p-0 text-white"
+                                      onClick={() =>
+                                        handleDeleteSkill(item.userSkillId)
+                                      }
+                                    >
+                                      <Icon icon={"bi:trash"} width={"15"} />
+                                    </button>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </form>
                       </div>
                     </div>

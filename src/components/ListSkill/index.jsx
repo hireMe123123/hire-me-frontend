@@ -5,7 +5,7 @@ export default function CardSkill(props) {
   return (
     <div>
       <button className="btn btn-warning" disabled>
-        {props.dataSkill.skill}
+        {props.dataSkill}
       </button>
     </div>
   );
