@@ -119,19 +119,22 @@ body {
   margin-bottom: 5px;
 }
 
-.input_style > input {
+.input_style > input,
+select {
   height: 50px;
 }
 
 .input_style > input,
-textarea {
+textarea,
+select {
   border: 1px solid #e2e5ed;
   border-radius: 4px;
   padding: 15px;
 }
 
 .input_style > input::placeholder,
-textarea::placeholder {
+textarea::placeholder,
+select::placeholder {
   font-size: 14px;
   color: #858d96;
 }

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import people from "../../assets/img/img-opinion3.png";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { Icon } from "@iconify/react";
@@ -27,15 +26,18 @@ import { Spinner } from "react-bootstrap";
 
 export default function EditProfileUser() {
   const dispatch = useDispatch();
+  const jobType = ["Masukkan tipe job", "Freelance", "Fulltime"];
   const user = useSelector((state) => state.user);
   const skill = useSelector((state) => state.skill);
   const userSkill = skill.loadingGet ? "" : skill.data[0].userSkill;
-  // const [formSkillUpdate, setFormSkillUpdate] = useState();
   const dataUser = user.data[0];
   const [userData, setUserData] = useState(dataUser);
   const [experience, setExperience] = useState({ userId: dataUser?.userId });
   const [portofolio, setPortofolio] = useState({ userId: dataUser?.userId });
-  const [inputSkill, setInputSkill] = useState({ userId: dataUser?.userId });
+  const [inputSkill, setInputSkill] = useState({
+    userId: dataUser?.userId,
+    skill: "",
+  });
   const [updateSkillUser, setUpdateSkillUser] = useState();
   const [newImage, setNewImage] = useState({});
   const [imagePreview, setImagePreview] = useState("");
@@ -86,7 +88,7 @@ export default function EditProfileUser() {
   const handleCreateSkill = () => {
     dispatch(createSkill(inputSkill)).then(() => {
       dispatch(getDataSkillByUserId(dataUser.userId));
-      setInputSkill("");
+      setInputSkill({ userId: dataUser?.userId, skill: "" });
     });
   };
 
@@ -282,14 +284,27 @@ export default function EditProfileUser() {
 
                           <div className="d-flex flex-column input_style">
                             <label htmlFor="typeJob">Type Job</label>
-                            <input
-                              type="text"
+                            <select
                               id="typeJob"
                               name="typeJob"
-                              placeholder="Masukkan tipe job"
-                              value={userData.typeJob ? userData.typeJob : ""}
+                              value={
+                                userData.typeJob
+                                  ? userData.typeJob
+                                  : "Masukkan tipe job"
+                              }
                               onChange={inputData}
-                            />
+                            >
+                              {jobType.map((item, index) => (
+                                <option
+                                  value={
+                                    item === "Masukkan tipe job" ? "" : item
+                                  }
+                                  key={index}
+                                >
+                                  {item}
+                                </option>
+                              ))}
+                            </select>
                           </div>
 
                           <div className="d-flex flex-column input_style">
@@ -389,6 +404,7 @@ export default function EditProfileUser() {
                               name="skill"
                               placeholder="Java"
                               className="w-100"
+                              value={inputSkill.skill}
                               onChange={handleInputSkill}
                             />
                             <button
