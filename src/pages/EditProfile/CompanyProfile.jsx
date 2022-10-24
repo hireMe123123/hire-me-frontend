@@ -44,14 +44,18 @@ export default function EditProfileCompany() {
   const handleUpdateImage = () => {
     const imageData = new FormData();
     imageData.append("image", newImage.image);
-    dispatch(updateCompanyImage(dataCompany.companyId, imageData)).then(
-      (response) => {
+    dispatch(updateCompanyImage(dataCompany.companyId, imageData))
+      .then((response) => {
         dispatch(getDataCompanyById(dataCompany.companyId));
         toast.success(response.value.data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
-      }
-    );
+      })
+      .catch((error) =>
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        })
+      );
   };
   return (
     <>
