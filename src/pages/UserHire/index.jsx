@@ -51,8 +51,8 @@ export default function UserHire() {
         <div className="py-5">
           <div className="container-fluid ">
             <div className="container">
-              <div className="d-flex flex-row align-items-start">
-                <div className="col-4 border rounded rounded-3 me-4 bg-white">
+              <div className="d-flex flex-row flex-wrap align-items-start gap-5">
+                <div className="col-md-4 col-sm-12 border rounded rounded-3 bg-white">
                   <div className="px-4 py-5">
                     <div className="text-center mb-5">
                       <img
@@ -125,7 +125,7 @@ export default function UserHire() {
                   </div>
                 </div>
 
-                <div className="container">
+                <div className="col-md-7 col-sm-12 border rounded-3 bg-white">
                   <div className="px-4 py-5">
                     <div className="h3 fw-bold">
                       Hubungi {user.data[0]?.name}

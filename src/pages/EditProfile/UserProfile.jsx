@@ -152,6 +152,8 @@ export default function EditProfileUser() {
     });
   };
 
+  console.log(updateDataUser.payload);
+
   return (
     <>
       <header>

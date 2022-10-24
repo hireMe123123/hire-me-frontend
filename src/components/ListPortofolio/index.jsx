@@ -1,5 +1,4 @@
 import React from "react";
-// import noPhoto from "../../assets/img/no-photo.png";
 
 export default function ListPortofolio(props) {
   const imagePortofolio = ` https://res.cloudinary.com/dihnhvb2q/image/upload/v1666284419/${props.dataPortofolio.image}`;
