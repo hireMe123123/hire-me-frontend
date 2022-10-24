@@ -27,12 +27,13 @@ import { Spinner } from "react-bootstrap";
 
 export default function EditProfileUser() {
   const dispatch = useDispatch();
+  const jobType = ["Masukkan tipe job", "Freelance", "Fulltime"];
   const user = useSelector((state) => state.user);
   const skill = useSelector((state) => state.skill);
   const userSkill = skill.loadingGet ? "" : skill.data[0].userSkill;
-  // const [formSkillUpdate, setFormSkillUpdate] = useState();
   const dataUser = user.data[0];
   const [userData, setUserData] = useState(dataUser);
+<<<<<<< HEAD
   const [experience, setExperience] = useState({
     userId: dataUser?.userId,
     company: "",
@@ -44,6 +45,10 @@ export default function EditProfileUser() {
     projectName: "",
     projectRepo: "",
   });
+=======
+  const [experience, setExperience] = useState({ userId: dataUser?.userId });
+  const [portofolio, setPortofolio] = useState({ userId: dataUser?.userId });
+>>>>>>> 7ea31c6f9f7d06e44c2202e1842e39d14788a0d4
   const [inputSkill, setInputSkill] = useState({
     userId: dataUser?.userId,
     skill: "",
@@ -312,14 +317,27 @@ export default function EditProfileUser() {
 
                           <div className="d-flex flex-column input_style">
                             <label htmlFor="typeJob">Type Job</label>
-                            <input
-                              type="text"
+                            <select
                               id="typeJob"
                               name="typeJob"
-                              placeholder="Masukkan tipe job"
-                              value={userData.typeJob ? userData.typeJob : ""}
+                              value={
+                                userData.typeJob
+                                  ? userData.typeJob
+                                  : "Masukkan tipe job"
+                              }
                               onChange={inputData}
-                            />
+                            >
+                              {jobType.map((item, index) => (
+                                <option
+                                  value={
+                                    item === "Masukkan tipe job" ? "" : item
+                                  }
+                                  key={index}
+                                >
+                                  {item}
+                                </option>
+                              ))}
+                            </select>
                           </div>
 
                           <div className="d-flex flex-column input_style">
@@ -431,7 +449,11 @@ export default function EditProfileUser() {
                             </button>
                           </div>
 
-                          <div className={`d-flex input_style gap-5`}>
+                          <div
+                            className={`${
+                              updateSkillUser ? "d-flex" : "d-none"
+                            } input_style gap-5`}
+                          >
                             <input
                               type="text"
                               id="skill"
