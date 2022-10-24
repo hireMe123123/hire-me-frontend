@@ -127,9 +127,12 @@ export default function EditProfileUser() {
   const handleUpdateImage = () => {
     const imageData = new FormData();
     imageData.append("image", newImage.image);
-    dispatch(updateUserImage(dataUser.userId, imageData)).then(() => {
-      dispatch(getDataUserById(dataUser.userId));
-    });
+    dispatch(updateUserImage(dataUser.userId, imageData))
+      .then((response) => {
+        alert(response.value.data.message);
+        dispatch(getDataUserById(dataUser.userId));
+      })
+      .catch((error) => alert(error.response.data.message));
   };
 
   return (
