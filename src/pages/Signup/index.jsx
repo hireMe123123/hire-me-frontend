@@ -96,6 +96,7 @@ export default function Signup() {
                   name="name"
                   placeholder="Masukan nama panjang"
                   onChange={handleChangeForm}
+                  required={true}
                 />{" "}
                 <br />
                 <h6 className="auth-form-text">Email</h6>
