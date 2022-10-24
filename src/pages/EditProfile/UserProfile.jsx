@@ -33,9 +33,21 @@ export default function EditProfileUser() {
   // const [formSkillUpdate, setFormSkillUpdate] = useState();
   const dataUser = user.data[0];
   const [userData, setUserData] = useState(dataUser);
-  const [experience, setExperience] = useState({ userId: dataUser?.userId });
-  const [portofolio, setPortofolio] = useState({ userId: dataUser?.userId });
-  const [inputSkill, setInputSkill] = useState({ userId: dataUser?.userId });
+  const [experience, setExperience] = useState({
+    userId: dataUser?.userId,
+    company: "",
+    position: "",
+    description: "",
+  });
+  const [portofolio, setPortofolio] = useState({
+    userId: dataUser?.userId,
+    projectName: "",
+    projectRepo: "",
+  });
+  const [inputSkill, setInputSkill] = useState({
+    userId: dataUser?.userId,
+    skill: "",
+  });
   const [updateSkillUser, setUpdateSkillUser] = useState();
   const [newImage, setNewImage] = useState({});
   const [imagePreview, setImagePreview] = useState("");
@@ -86,7 +98,7 @@ export default function EditProfileUser() {
   const handleCreateSkill = () => {
     dispatch(createSkill(inputSkill)).then(() => {
       dispatch(getDataSkillByUserId(dataUser.userId));
-      setInputSkill("");
+      setInputSkill({ userId: dataUser?.userId, skill: "" });
     });
   };
 
@@ -108,6 +120,12 @@ export default function EditProfileUser() {
   const handleCreateExperience = () => {
     dispatch(createExperience(experience)).then(() => {
       dispatch(getDataExperienceByUserId(dataUser.userId));
+      setExperience({
+        userId: dataUser?.userId,
+        company: "",
+        position: "",
+        description: "",
+      });
     });
   };
 
@@ -117,7 +135,12 @@ export default function EditProfileUser() {
       formData.append(data, portofolio[data]);
     }
     dispatch(createPortofolio(formData)).then(() => {
-      getDataPortofolioByUserId(dataUser.userId);
+      dispatch(getDataPortofolioByUserId(dataUser.userId));
+      setPortofolio({
+        userId: dataUser?.userId,
+        projectName: "",
+        projectRepo: "",
+      });
     });
   };
 
@@ -394,6 +417,7 @@ export default function EditProfileUser() {
                               name="skill"
                               placeholder="Java"
                               className="w-100"
+                              value={inputSkill.skill}
                               onChange={handleInputSkill}
                             />
                             <button
@@ -479,6 +503,7 @@ export default function EditProfileUser() {
                                 type="text"
                                 id="company"
                                 name="company"
+                                value={experience.company}
                                 placeholder="PT Apa Saja"
                                 onChange={inputExperience}
                               />
@@ -490,6 +515,7 @@ export default function EditProfileUser() {
                                 type="text"
                                 id="position"
                                 name="position"
+                                value={experience.position}
                                 placeholder="web developer"
                                 onChange={inputExperience}
                               />
@@ -527,6 +553,7 @@ export default function EditProfileUser() {
                               id="description"
                               rows="5"
                               placeholder="Tuliskan deskripsi singkat"
+                              value={experience.description}
                               onChange={inputExperience}
                             ></textarea>
                           </div>
@@ -565,6 +592,7 @@ export default function EditProfileUser() {
                               type="text"
                               id="projectName"
                               name="projectName"
+                              value={portofolio.projectName}
                               placeholder="Masukkan nama aplikasi"
                               onChange={inputPortofolio}
                             />
@@ -576,6 +604,7 @@ export default function EditProfileUser() {
                               type="text"
                               id="projectRepo"
                               name="projectRepo"
+                              value={portofolio.projectRepo}
                               placeholder="Masukkan link repo"
                               onChange={inputPortofolio}
                             />
