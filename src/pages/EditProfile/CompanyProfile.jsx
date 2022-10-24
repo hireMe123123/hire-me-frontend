@@ -31,14 +31,18 @@ export default function EditProfileCompany() {
     setImagePreview(URL.createObjectURL(files[0]));
   };
   const handleUpdateDataCompany = () => {
-    dispatch(updateDataCompany(dataCompany.companyId, companyData)).then(
-      (response) => {
+    dispatch(updateDataCompany(dataCompany.companyId, companyData))
+      .then((response) => {
         dispatch(getDataCompanyById(dataCompany.companyId));
         toast.success(response.value.data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
-      }
-    );
+      })
+      .catch((error) =>
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        })
+      );
   };
 
   const handleUpdateImage = () => {
