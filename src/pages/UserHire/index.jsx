@@ -40,8 +40,6 @@ export default function UserHire() {
     console.log(data);
   };
 
-  console.log(form);
-
   return (
     <div>
       {/* Header */}

@@ -35,8 +35,6 @@ export default function UserProfile() {
   const checkDataUser =
     Object.keys(company.data).length > 0 ? "Company" : "User";
 
-  console.log(checkDataUser);
-
   return (
     <div>
       {/* Header */}

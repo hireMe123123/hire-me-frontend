@@ -14,8 +14,6 @@ export default function CompanyProfile() {
 
   const imageCompany = `https://res.cloudinary.com/dihnhvb2q/image/upload/v1666284419/${company.data[0].image}`;
 
-  console.log(imageCompany);
-
   return (
     <div>
       <div>
