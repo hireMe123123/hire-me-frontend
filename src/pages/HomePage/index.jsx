@@ -11,6 +11,7 @@ import Card from "../../components/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { getDataUser } from "../../stores/actions/user";
 import ReactPaginate from "react-paginate";
+import { Container } from "react-bootstrap";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -53,110 +54,115 @@ export default function HomePage() {
         <NavbarHeader isLogin={isLogin} />
       </header>
       <div className="d-flex align-items-center home__tittle">
-        <h3 className="font-weight-medium">Talents</h3>
+        <Container>
+          <h3 className="font-weight-medium">Talents</h3>
+        </Container>
       </div>
+
       <div className="home__body">
-        <div className="home__container">
-          <div className="home__searchbar">
-            <input
-              placeholder="Search for any skill"
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <div className="d-flex flex-row justify-content-center align-items-center">
-              <img
-                src={arrow}
-                style={{
-                  width: "20px",
-                  transform: rotate ? "rotate(180deg)" : "rotate(0)",
-                }}
-                onClick={() => {
-                  setRotate(!rotate);
-                }}
+        <Container>
+          <div className="home__container">
+            <div className="home__searchbar">
+              <input
+                placeholder="Search for any skill"
+                onChange={(e) => setSearch(e.target.value)}
               />
-              <p
-                className="ml-3 mr-3 mb-0"
-                style={{ cursor: "pointer" }}
-                onClick={() => setDropDown((dropDown) => !dropDown)}
-              >
-                Sort
-              </p>
-              <ul className={`sortDrop list-group ${dropDown && "active"}`}>
-                <li
-                  className="list-group-item"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    setSortBySkill("totalskills");
-                    setDropDown(!dropDown);
+              <div className="d-flex flex-row justify-content-center align-items-center">
+                <img
+                  src={arrow}
+                  style={{
+                    width: "20px",
+                    transform: rotate ? "rotate(180deg)" : "rotate(0)",
                   }}
-                >
-                  Sort By Skills
-                </li>
-                <li
-                  className="list-group-item"
-                  style={{ cursor: "pointer" }}
                   onClick={() => {
-                    setSortBy("Freelance");
-                    setDropDown(!dropDown);
-                    setSortBySkill("");
+                    setRotate(!rotate);
                   }}
-                >
-                  Sort By Freelance
-                </li>
-                <li
-                  className="list-group-item"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    setSortBy("Fulltime");
-                    setDropDown(!dropDown);
-                  }}
-                >
-                  Sort By Fulltime
-                </li>
-                <li
-                  className="list-group-item"
-                  style={{ cursor: "pointer", color: "red" }}
-                  onClick={() => {
-                    setSortBy("");
-                    setDropDown(!dropDown);
-                  }}
-                >
-                  Reset
-                </li>
-              </ul>
-            </div>
-            <button>Search</button>
-          </div>
-          <div className="main__section">
-            {getEmployee.length > 0 ? (
-              getEmployee.map((i) => (
-                <Card
-                  name={i.name}
-                  job={i.profession}
-                  jobType={i.typeJob}
-                  location={i.domicile}
-                  image={i.image}
-                  skills={i.userSkill}
                 />
-              ))
-            ) : (
-              <h1 className="w-100">Loading ..</h1>
-            )}
+                <p
+                  className="ml-3 mr-3 mb-0"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setDropDown((dropDown) => !dropDown)}
+                >
+                  Sort
+                </p>
+                <ul className={`sortDrop list-group ${dropDown && "active"}`}>
+                  <li
+                    className="list-group-item"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      setSortBySkill("totalskills");
+                      setDropDown(!dropDown);
+                    }}
+                  >
+                    Sort By Skills
+                  </li>
+                  <li
+                    className="list-group-item"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      setSortBy("Freelance");
+                      setDropDown(!dropDown);
+                      setSortBySkill("");
+                    }}
+                  >
+                    Sort By Freelance
+                  </li>
+                  <li
+                    className="list-group-item"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      setSortBy("Fulltime");
+                      setDropDown(!dropDown);
+                    }}
+                  >
+                    Sort By Fulltime
+                  </li>
+                  <li
+                    className="list-group-item"
+                    style={{ cursor: "pointer", color: "red" }}
+                    onClick={() => {
+                      setSortBy("");
+                      setDropDown(!dropDown);
+                    }}
+                  >
+                    Reset
+                  </li>
+                </ul>
+              </div>
+              <button>Search</button>
+            </div>
+            <div className="main__section">
+              {getEmployee.length > 0 ? (
+                getEmployee.map((i) => (
+                  <Card
+                    name={i.name}
+                    job={i.profession}
+                    jobType={i.typeJob}
+                    location={i.domicile}
+                    image={i.image}
+                    skills={i.userSkill}
+                  />
+                ))
+              ) : (
+                <h1 className="w-100">Loading ..</h1>
+              )}
+            </div>
           </div>
-        </div>
-        {/* <div className="home__pagination">
+          {/* <div className="home__pagination">
           <Pagination />
         </div> */}
-        <ReactPaginate
-          previousLabel={"<"}
-          nextLabel={">"}
-          pageCount={pageInfo.totalPage}
-          onPageChange={handlePagination}
-          containerClassName={"pagination"}
-          previousLinkClassName={"pagination__link"}
-          nextLinkClassName={"pagination__link"}
-          disabledClassName={"pagination__link--disabled"}
-          activeClassName={"pagination__link--active"}
-        />
+          <ReactPaginate
+            previousLabel={"<"}
+            nextLabel={">"}
+            pageCount={pageInfo.totalPage}
+            onPageChange={handlePagination}
+            containerClassName={"pagination"}
+            previousLinkClassName={"pagination__link"}
+            nextLinkClassName={"pagination__link"}
+            disabledClassName={"pagination__link--disabled"}
+            activeClassName={"pagination__link--active"}
+          />
+        </Container>
       </div>
       <Footer />
     </>
