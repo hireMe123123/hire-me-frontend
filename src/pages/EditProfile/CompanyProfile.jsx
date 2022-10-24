@@ -40,12 +40,12 @@ export default function EditProfileCompany() {
   const handleUpdateImage = () => {
     const imageData = new FormData();
     imageData.append("image", newImage.image);
-    dispatch(updateCompanyImage(dataCompany.companyId, imageData)).then(
-      (response) => {
+    dispatch(updateCompanyImage(dataCompany.companyId, imageData))
+      .then((response) => {
         dispatch(getDataCompanyById(dataCompany.companyId));
         alert(response.value.data.message);
-      }
-    );
+      })
+      .catch((error) => alert(error.response.data.message));
   };
   return (
     <>
