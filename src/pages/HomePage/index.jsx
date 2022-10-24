@@ -147,6 +147,24 @@ export default function HomePage() {
                 <h1 className="w-100">Loading ..</h1>
               )}
             </div>
+            <button>Search</button>
+          </div>
+          <div className="main__section">
+            {getEmployee.length > 0 ? (
+              getEmployee.map((i) => (
+                <Card
+                  userId={i.userId}
+                  name={i.name}
+                  job={i.profession}
+                  jobType={i.typeJob}
+                  location={i.domicile}
+                  image={i.image}
+                  skills={i.userSkill}
+                />
+              ))
+            ) : (
+              <h1 className="w-100">Loading ..</h1>
+            )}
           </div>
           {/* <div className="home__pagination">
           <Pagination />

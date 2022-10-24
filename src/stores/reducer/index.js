@@ -9,6 +9,10 @@ import signinCompany from "./signincompany";
 import portofolio from "./portofolio";
 import experience from "./experience";
 import skill from "./skill";
+import forgotPasswordU from "./forgotPassword";
+import forgotPasswordC from "./forgotPasswordCompany";
+import resetPasswordU from "./resetPassword";
+import resetPasswordC from "./resetPasswordCompany";
 
 export default combineReducers({
   user,
@@ -20,4 +24,8 @@ export default combineReducers({
   portofolio,
   experience,
   skill,
+  forgotPasswordC,
+  forgotPasswordU,
+  resetPasswordU,
+  resetPasswordC,
 });

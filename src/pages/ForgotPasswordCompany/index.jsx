@@ -4,36 +4,29 @@ import hire from "../../assets/img/hireme.png";
 
 /* IMPORT IMAGE */
 import logo from "../../assets/img/logo.png";
-
 /* React Function */
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import { loginCompany } from "../../stores/actions/signincompany";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getDataCompanyById } from "../../stores/actions/company";
+import { forgotPasswordCompany } from "../../stores/actions/forgotPasswordCompany";
 
-export default function Signin() {
+export default function ForgotPassword() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: "",
-    password: "",
   });
   const handleNavigate = (nav) => {
     navigate(`/${nav}`);
   };
-  const handleLogin = () => {
-    dispatch(loginCompany(form))
+  const handleForgotPasswordCompany = () => {
+    dispatch(forgotPasswordCompany(form))
       .then((response) => {
         alert(response.value.data.message);
-        dispatch(getDataCompanyById(response.value.data.data.companyId));
-        localStorage.setItem("token", response.value.data.data.token);
-        navigate("/");
       })
       .catch((error) => alert(error.response.data.message));
   };
-
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -66,14 +59,13 @@ export default function Signin() {
                   onClick={() => handleNavigate("")}
                 />
                 <br />
-                <h1 className="full-text container-title">Halo, Pewpeople</h1>
-                <h1 className="short-text container-title">Signin</h1>
+                <h1 className="container-title">Reset password</h1>
                 <p className="full-text text-container">
-                  Selamat datang Pewpeople, Masukan email dan kata sandi untuk
-                  segera terhubung <br /> dengan tenaga kerja berkualitas
+                  Masukan email akun yang sudah terverifikasi dan kami akan
+                  mengirimkan link reset password
                 </p>
                 <p className="short-text text-container">
-                  Selamat datang Pewpeole, masukan email dan kata sandi
+                  Masukan email akun anda
                 </p>
               </div>
               <div className="auth-form">
@@ -86,40 +78,14 @@ export default function Signin() {
                   onChange={handleChangeForm}
                 />{" "}
                 <br />
-                <h6 className="auth-form-text">Kata Sandi</h6>
-                <input
-                  type="password"
-                  className="form-control"
-                  name="password"
-                  placeholder="Masukan alamat sandi"
-                  onChange={handleChangeForm}
-                />{" "}
-                <br />
-                <div className="d-flex justify-content-end">
-                  <button
-                    className="click-me"
-                    onClick={() => handleNavigate("forgot-password-company")}
-                  >
-                    Lupa kata sandi?
-                  </button>
-                </div>
                 <div className="d-grid">
                   <button
                     className="btn btn-warning in-button"
-                    onClick={handleLogin}
+                    onClick={handleForgotPasswordCompany}
                   >
-                    Masuk
+                    Send password reset email
                   </button>
                 </div>
-                <h4 className="d-flex justify-content-center account-check">
-                  Anda belum punya akun?{" "}
-                  <button
-                    className="click-me"
-                    onClick={() => handleNavigate("signup-company")}
-                  >
-                    Daftar disini
-                  </button>
-                </h4>
               </div>
             </header>
           </div>

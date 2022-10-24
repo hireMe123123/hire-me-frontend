@@ -1,35 +1,37 @@
 /* IMPORT CSS */
 import "./index.css";
 import hire from "../../assets/img/hireme.png";
+/* IMPORT AXIOS */
+// import axios from "../../utils/axios";
 
 /* IMPORT IMAGE */
 import logo from "../../assets/img/logo.png";
-
 /* React Function */
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import React from "react";
-import { loginCompany } from "../../stores/actions/signincompany";
 import { useDispatch } from "react-redux";
-import { getDataCompanyById } from "../../stores/actions/company";
+import React from "react";
+import { resetPasswordCompany } from "../../stores/actions/resetPasswordCompany";
 
-export default function Signin() {
+export default function ResetPassword() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [form, setForm] = useState({
-    email: "",
-    password: "",
+    newPassword: "",
+    confirmPassword: "",
   });
+
   const handleNavigate = (nav) => {
     navigate(`/${nav}`);
   };
-  const handleLogin = () => {
-    dispatch(loginCompany(form))
+  const { OTPReset } = useParams();
+
+  const handleReset = () => {
+    dispatch(resetPasswordCompany(OTPReset, form))
       .then((response) => {
         alert(response.value.data.message);
-        dispatch(getDataCompanyById(response.value.data.data.companyId));
-        localStorage.setItem("token", response.value.data.data.token);
-        navigate("/");
+        navigate("/signin-company");
       })
       .catch((error) => alert(error.response.data.message));
   };
@@ -37,7 +39,6 @@ export default function Signin() {
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
   return (
     <>
       {/* START MAIN */}
@@ -48,7 +49,7 @@ export default function Signin() {
               <img src={hire} alt="hire" className="hire-image" />
               <div className="mask"></div>
               <div className="text">
-                <p>
+                <p className="text-p">
                   Temukan developer berbakat & terbaik di berbagai bidang
                   keahlian
                 </p>
@@ -66,60 +67,38 @@ export default function Signin() {
                   onClick={() => handleNavigate("")}
                 />
                 <br />
-                <h1 className="full-text container-title">Halo, Pewpeople</h1>
-                <h1 className="short-text container-title">Signin</h1>
-                <p className="full-text text-container">
-                  Selamat datang Pewpeople, Masukan email dan kata sandi untuk
-                  segera terhubung <br /> dengan tenaga kerja berkualitas
-                </p>
-                <p className="short-text text-container">
-                  Selamat datang Pewpeole, masukan email dan kata sandi
+                <h1 className="container-title">Reset password</h1>
+                <p className="text-container">
+                  Ubah password untuk mengaktivikasi akun anda kembali
                 </p>
               </div>
               <div className="auth-form">
-                <h6 className="auth-form-text">Email</h6>
-                <input
-                  type="email"
-                  className="form-control"
-                  name="email"
-                  placeholder="Masukan alamat email"
-                  onChange={handleChangeForm}
-                />{" "}
-                <br />
-                <h6 className="auth-form-text">Kata Sandi</h6>
+                <h6 className="auth-form-text">Kata sandi</h6>
                 <input
                   type="password"
                   className="form-control"
-                  name="password"
-                  placeholder="Masukan alamat sandi"
+                  name="newPassword"
+                  placeholder="Masukan kata sandi"
                   onChange={handleChangeForm}
                 />{" "}
                 <br />
-                <div className="d-flex justify-content-end">
-                  <button
-                    className="click-me"
-                    onClick={() => handleNavigate("forgot-password-company")}
-                  >
-                    Lupa kata sandi?
-                  </button>
-                </div>
+                <h6 className="auth-form-text">Konfirmasi kata sandi baru</h6>
+                <input
+                  type="password"
+                  className="form-control"
+                  name="confirmPassword"
+                  placeholder="Masukan konfirmasi kata sandi"
+                  onChange={handleChangeForm}
+                />{" "}
+                <br />
                 <div className="d-grid">
                   <button
                     className="btn btn-warning in-button"
-                    onClick={handleLogin}
+                    onClick={handleReset}
                   >
-                    Masuk
+                    Reset Password
                   </button>
                 </div>
-                <h4 className="d-flex justify-content-center account-check">
-                  Anda belum punya akun?{" "}
-                  <button
-                    className="click-me"
-                    onClick={() => handleNavigate("signup-company")}
-                  >
-                    Daftar disini
-                  </button>
-                </h4>
               </div>
             </header>
           </div>

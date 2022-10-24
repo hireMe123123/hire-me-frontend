@@ -24,9 +24,8 @@ export default function ForgotPassword() {
     dispatch(forgotPasswordUser(form))
       .then((response) => {
         alert(response.value.data.message);
-        // navigate("/reset-password/:id");
       })
-      .catch((error) => alert(error));
+      .catch((error) => alert(error.response.data.message));
   };
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

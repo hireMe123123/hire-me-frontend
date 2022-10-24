@@ -75,6 +75,7 @@
   display: block;
 }
 
+
 .main__section {
   width: 100%;
   margin-top: 30px;
@@ -83,6 +84,16 @@
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
+ .main__section {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    cursor: pointer;
+ }
 
 /* .home__pagination{
     width: auto;

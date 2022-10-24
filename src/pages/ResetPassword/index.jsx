@@ -2,7 +2,7 @@
 import "./index.css";
 import hire from "../../assets/img/hireme.png";
 /* IMPORT AXIOS */
-import axios from "../../utils/axios";
+// import axios from "../../utils/axios";
 
 /* IMPORT IMAGE */
 import logo from "../../assets/img/logo.png";
@@ -10,10 +10,14 @@ import logo from "../../assets/img/logo.png";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import React from "react";
+import { resetPasswordUser } from "../../stores/actions/resetPasswordUser";
 
 export default function ResetPassword() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { OTPReset } = useParams();
   const [form, setForm] = useState({
     newPassword: "",
     confirmPassword: "",
@@ -22,19 +26,14 @@ export default function ResetPassword() {
   const handleNavigate = (nav) => {
     navigate(`/${nav}`);
   };
-  // const user = useSelector((state) => state.user);
-  // console.log(user);
-  // useEffect(() => {
-  //   getData();
-  // }, []);
-  const { OTPReset } = useParams();
-  const handleReset = async () => {
-    try {
-      const result = await axios.patch(`auth/resetPassword/${OTPReset}`, form);
-      alert(result.data.message);
-    } catch (error) {
-      alert(error.response.data.message);
-    }
+
+  const handleReset = () => {
+    dispatch(resetPasswordUser(OTPReset, form))
+      .then((response) => {
+        alert(response.value.data.message);
+        navigate("/signin");
+      })
+      .catch((error) => alert(error.response.data.message));
   };
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
