@@ -13,3 +13,17 @@ export const createExperience = (data) => {
     payload: axios.post("experience", data),
   };
 };
+
+export const updateExperience = (experienceId, data) => {
+  return {
+    type: "UPDATE_EXPERIENCE",
+    payload: axios.patch(`experience/${experienceId}`, data),
+  };
+};
+
+export const deleteExperience = (experienceId) => {
+  return {
+    type: "DELETE_EXPERIENCE",
+    payload: axios.delete(`experience/${experienceId}`),
+  };
+};

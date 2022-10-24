@@ -10,11 +10,15 @@ import {
 } from "../../stores/actions/user";
 import {
   createExperience,
+  deleteExperience,
   getDataExperienceByUserId,
+  updateExperience,
 } from "../../stores/actions/experience";
 import {
   createPortofolio,
+  deletePortfolio,
   getDataPortofolioByUserId,
+  updatePortofolio,
 } from "../../stores/actions/portofolio";
 import {
   createSkill,
@@ -23,6 +27,8 @@ import {
   updateSkill,
 } from "../../stores/actions/skill";
 import { Spinner } from "react-bootstrap";
+// import ListExperience from "../../components/ListExperience";
+import { Modal } from "react-bootstrap";
 
 export default function EditProfileUser() {
   const dispatch = useDispatch();
@@ -31,9 +37,12 @@ export default function EditProfileUser() {
   const skill = useSelector((state) => state.skill);
   const userSkill = skill.loadingGet ? "" : skill.data[0].userSkill;
   const dataUser = user.data[0];
+  const [modal, setModal] = useState();
   const [userData, setUserData] = useState(dataUser);
-  const [experience, setExperience] = useState({ userId: dataUser?.userId });
-  const [portofolio, setPortofolio] = useState({ userId: dataUser?.userId });
+  const dataExperience = useSelector((state) => state.experience);
+  const dataPortofolio = useSelector((state) => state.portofolio);
+  const [experience, setExperience] = useState({});
+  const [portofolio, setPortofolio] = useState({});
   const [inputSkill, setInputSkill] = useState({
     userId: dataUser?.userId,
     skill: "",
@@ -42,6 +51,46 @@ export default function EditProfileUser() {
   const [newImage, setNewImage] = useState({});
   const [imagePreview, setImagePreview] = useState("");
   const lengthImage = Object.keys(newImage).length;
+
+  const handleModal = (modal, data) => {
+    switch (modal) {
+      case "experience":
+        setModal("experience");
+        setExperience(data);
+        break;
+      case "portofolio":
+        setModal("portofolio");
+        setPortofolio(data);
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const resetForm = (modal) => {
+    setModal();
+    switch (modal) {
+      case "experience":
+        setExperience({
+          company: "",
+          position: "",
+          entryDate: "",
+          exitDate: "",
+          description: "",
+        });
+        break;
+      case "portofolio":
+        setPortofolio({
+          projectName: "",
+          projectRepo: "",
+        });
+        break;
+
+      default:
+        break;
+    }
+  };
 
   const inputData = (e) => {
     const { name, value } = e.target;
@@ -67,9 +116,13 @@ export default function EditProfileUser() {
     const { name, value, files } = e.target;
 
     if (name === "image") {
-      setPortofolio({ ...portofolio, [name]: files[0] });
+      setPortofolio({
+        ...portofolio,
+        userId: dataUser.userId,
+        [name]: files[0],
+      });
     } else {
-      setPortofolio({ ...portofolio, [name]: value });
+      setPortofolio({ ...portofolio, userId: dataUser.userId, [name]: value });
     }
   };
 
@@ -108,7 +161,33 @@ export default function EditProfileUser() {
   };
 
   const handleCreateExperience = () => {
-    dispatch(createExperience(experience)).then(() => {
+    dispatch(createExperience({ ...experience, userId: dataUser.userId })).then(
+      () => {
+        dispatch(getDataExperienceByUserId(dataUser.userId));
+        resetForm("experience");
+      }
+    );
+  };
+
+  const handleUpdateExperience = () => {
+    const {
+      experienceId,
+      company,
+      position,
+      entryDate,
+      exitDate,
+      description,
+    } = experience;
+
+    const data = { company, position, entryDate, exitDate, description };
+    dispatch(updateExperience(experienceId, data)).then(() => {
+      dispatch(getDataExperienceByUserId(dataUser.userId));
+      resetForm("experience");
+    });
+  };
+
+  const handleDeleteExperience = (experienceId) => {
+    dispatch(deleteExperience(experienceId)).then(() => {
       dispatch(getDataExperienceByUserId(dataUser.userId));
     });
   };
@@ -119,7 +198,27 @@ export default function EditProfileUser() {
       formData.append(data, portofolio[data]);
     }
     dispatch(createPortofolio(formData)).then(() => {
-      getDataPortofolioByUserId(dataUser.userId);
+      dispatch(getDataPortofolioByUserId(dataUser.userId));
+      resetForm("portofolio");
+    });
+  };
+
+  const handleUpdatePortofolio = () => {
+    const { portofolioId, projectName, projectRepo, image } = portofolio;
+    const dataTemp = { projectName, projectRepo, image };
+    const formData = new FormData();
+    for (const data in dataTemp) {
+      formData.append(data, portofolio[data]);
+    }
+    dispatch(updatePortofolio(portofolioId, formData)).then(() => {
+      dispatch(getDataPortofolioByUserId(dataUser.userId));
+      resetForm("portofolio");
+    });
+  };
+
+  const handleDeletePortofolio = (portofolioId) => {
+    dispatch(deletePortfolio(portofolioId)).then(() => {
+      dispatch(getDataPortofolioByUserId(dataUser.userId));
     });
   };
 
@@ -485,7 +584,7 @@ export default function EditProfileUser() {
 
                         <form
                           action=""
-                          className="mt-5 d-flex flex-column gap-4"
+                          className="mt-5 d-flex flex-column gap-4 mb-5"
                         >
                           <div className="row">
                             <div className="col d-flex flex-column input_style">
@@ -496,6 +595,7 @@ export default function EditProfileUser() {
                                 name="company"
                                 placeholder="PT Apa Saja"
                                 onChange={inputExperience}
+                                value={experience.company}
                               />
                             </div>
 
@@ -507,6 +607,7 @@ export default function EditProfileUser() {
                                 name="position"
                                 placeholder="web developer"
                                 onChange={inputExperience}
+                                value={experience.position}
                               />
                             </div>
                           </div>
@@ -519,6 +620,7 @@ export default function EditProfileUser() {
                                 id="entryDate"
                                 name="entryDate"
                                 onChange={inputExperience}
+                                value={experience.entryDate}
                               />
                             </div>
 
@@ -529,6 +631,7 @@ export default function EditProfileUser() {
                                 id="exitDate"
                                 name="exitDate"
                                 onChange={inputExperience}
+                                value={experience.exitDate}
                               />
                             </div>
                           </div>
@@ -543,6 +646,7 @@ export default function EditProfileUser() {
                               rows="5"
                               placeholder="Tuliskan deskripsi singkat"
                               onChange={inputExperience}
+                              value={experience.description}
                             ></textarea>
                           </div>
 
@@ -559,7 +663,171 @@ export default function EditProfileUser() {
                           >
                             Tambah pengalaman kerja
                           </button>
+
+                          <hr />
                         </form>
+
+                        <Modal
+                          size="lg"
+                          show={modal === "experience" ? true : false}
+                          onHide={() => resetForm("experience")}
+                          aria-labelledby="example-modal-sizes-title-lg"
+                        >
+                          <Modal.Header closeButton>
+                            <Modal.Title id="example-modal-sizes-title-lg">
+                              Update Pengalaman Kerja
+                            </Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                            <form
+                              action=""
+                              className="mt-3 d-flex flex-column gap-4 mb-1"
+                            >
+                              <div className="row">
+                                <div className="col d-flex flex-column input_style">
+                                  <label htmlFor="company">
+                                    Nama Perusahaan
+                                  </label>
+                                  <input
+                                    type="text"
+                                    id="company"
+                                    name="company"
+                                    placeholder="PT Apa Saja"
+                                    onChange={inputExperience}
+                                    value={experience.company}
+                                  />
+                                </div>
+
+                                <div className="col d-flex flex-column input_style">
+                                  <label htmlFor="position">Posisi</label>
+                                  <input
+                                    type="text"
+                                    id="position"
+                                    name="position"
+                                    placeholder="web developer"
+                                    onChange={inputExperience}
+                                    value={experience.position}
+                                  />
+                                </div>
+                              </div>
+
+                              <div className="row">
+                                <div className="col d-flex flex-column input_style">
+                                  <label htmlFor="entryDate">
+                                    Tanggal Masuk
+                                  </label>
+                                  <input
+                                    type="date"
+                                    id="entryDate"
+                                    name="entryDate"
+                                    onChange={inputExperience}
+                                    value={experience.entryDate}
+                                  />
+                                </div>
+
+                                <div className="col d-flex flex-column input_style">
+                                  <label htmlFor="exitDate">
+                                    Tanggal Keluar
+                                  </label>
+                                  <input
+                                    type="date"
+                                    id="exitDate"
+                                    name="exitDate"
+                                    onChange={inputExperience}
+                                    value={experience.exitDate}
+                                  />
+                                </div>
+                              </div>
+
+                              <div className="d-flex flex-column input_style">
+                                <label htmlFor="description">
+                                  Deskripsi singkat
+                                </label>
+                                <textarea
+                                  name="description"
+                                  id="description"
+                                  rows="5"
+                                  placeholder="Tuliskan deskripsi singkat"
+                                  onChange={inputExperience}
+                                  value={experience.description}
+                                ></textarea>
+                              </div>
+
+                              <hr />
+
+                              <button
+                                type="button"
+                                className="button color-yellow border-yellow fw-bold"
+                                style={{
+                                  paddingTop: "15px",
+                                  paddingBottom: "15px",
+                                }}
+                                onClick={handleUpdateExperience}
+                              >
+                                Update pengalaman kerja
+                              </button>
+
+                              <hr />
+                            </form>
+                          </Modal.Body>
+                        </Modal>
+
+                        {dataExperience.data.data?.length > 0 ? (
+                          dataExperience.data.data.map((item) => (
+                            <div key={item.experienceId}>
+                              <div className="bg-white">
+                                <div className="row ">
+                                  <div className="col-12 pb-3">
+                                    <div className="position-text">
+                                      {item.position}
+                                    </div>
+                                    <div className="text-muted">
+                                      {item.company}
+                                    </div>
+                                    <div className="text-muted">
+                                      {item.entryDate ? item.entryDate : "-"}{" "}
+                                      {" - "}
+                                      {item.exitDate
+                                        ? item.exitDate
+                                        : "Present"}
+                                    </div>
+                                    <div className="text-muted mt-3">
+                                      {" "}
+                                      {item.description}
+                                    </div>
+
+                                    <div className="d-flex gap-2 mt-2">
+                                      <button
+                                        className="button background-purple text-white button_small"
+                                        onClick={() =>
+                                          handleModal("experience", item)
+                                        }
+                                      >
+                                        Edit
+                                      </button>
+                                      <button
+                                        className="button background-purple text-white button_small"
+                                        onClick={() =>
+                                          handleDeleteExperience(
+                                            item.experienceId
+                                          )
+                                        }
+                                      >
+                                        Delete
+                                      </button>
+                                    </div>
+
+                                    <hr />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ))
+                        ) : (
+                          <div className="text-center">
+                            <h4>You have not any Experience uploaded</h4>
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -572,7 +840,7 @@ export default function EditProfileUser() {
 
                         <form
                           action=""
-                          className="mt-5 d-flex flex-column gap-4"
+                          className="mt-5 d-flex flex-column gap-4 mb-5"
                         >
                           <div className="d-flex flex-column input_style">
                             <label htmlFor="projectName">Nama aplikasi</label>
@@ -582,6 +850,7 @@ export default function EditProfileUser() {
                               name="projectName"
                               placeholder="Masukkan nama aplikasi"
                               onChange={inputPortofolio}
+                              value={portofolio.projectName}
                             />
                           </div>
 
@@ -593,6 +862,7 @@ export default function EditProfileUser() {
                               name="projectRepo"
                               placeholder="Masukkan link repo"
                               onChange={inputPortofolio}
+                              value={portofolio.projectRepo}
                             />
                           </div>
 
@@ -620,7 +890,126 @@ export default function EditProfileUser() {
                           >
                             Tambah portfolio
                           </button>
+
+                          <hr />
                         </form>
+
+                        <Modal
+                          size="lg"
+                          show={modal === "portofolio" ? true : false}
+                          onHide={() => resetForm("portofolio")}
+                          aria-labelledby="example-modal-sizes-title-lg"
+                        >
+                          <Modal.Header closeButton>
+                            <Modal.Title id="example-modal-sizes-title-lg">
+                              Update Portofolio
+                            </Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                            <form
+                              action=""
+                              className="mt-2 d-flex flex-column gap-4 mb-4"
+                            >
+                              <div className="d-flex flex-column input_style">
+                                <label htmlFor="projectName">
+                                  Nama aplikasi
+                                </label>
+                                <input
+                                  type="text"
+                                  id="projectName"
+                                  name="projectName"
+                                  placeholder="Masukkan nama aplikasi"
+                                  onChange={inputPortofolio}
+                                  value={portofolio.projectName}
+                                />
+                              </div>
+
+                              <div className="d-flex flex-column input_style">
+                                <label htmlFor="projectRepo">
+                                  Link repository
+                                </label>
+                                <input
+                                  type="text"
+                                  id="projectRepo"
+                                  name="projectRepo"
+                                  placeholder="Masukkan link repo"
+                                  onChange={inputPortofolio}
+                                  value={portofolio.projectRepo}
+                                />
+                              </div>
+
+                              <div className="d-flex flex-column input_style">
+                                <label htmlFor="image">Upload gambar</label>
+                                <input
+                                  type="file"
+                                  id="image"
+                                  name="image"
+                                  className="pb-5"
+                                  onChange={inputPortofolio}
+                                />
+                              </div>
+
+                              <hr />
+
+                              <button
+                                type="button"
+                                className="button color-yellow border-yellow fw-bold"
+                                style={{
+                                  paddingTop: "15px",
+                                  paddingBottom: "15px",
+                                }}
+                                onClick={handleUpdatePortofolio}
+                              >
+                                Update portfolio
+                              </button>
+                            </form>
+                          </Modal.Body>
+                        </Modal>
+
+                        {dataPortofolio.data.data?.length > 0 ? (
+                          dataPortofolio.data.data.map((item) => (
+                            <div
+                              className="d-flex gap-4 mb-4"
+                              key={item.portofolioId}
+                            >
+                              <div style={{ width: "130px" }}>
+                                <img
+                                  src={`https://res.cloudinary.com/dihnhvb2q/image/upload/v1666284419/${item.image}`}
+                                  alt=""
+                                  className="img-fluid"
+                                />
+                              </div>
+                              <div>
+                                <p className="fs-4 mb-0 fw-bold">
+                                  {item.projectName}
+                                </p>
+                                <p className="fs-6">{item.projectRepo}</p>
+                                <div className="d-flex gap-2 mt-2">
+                                  <button
+                                    className="button background-purple text-white button_small"
+                                    onClick={() =>
+                                      handleModal("portofolio", item)
+                                    }
+                                  >
+                                    Edit
+                                  </button>
+                                  <button
+                                    className="button background-purple text-white button_small"
+                                    onClick={() =>
+                                      handleDeletePortofolio(item.portofolioId)
+                                    }
+                                  >
+                                    Delete
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          ))
+                        ) : (
+                          <div className="text-center">
+                            <h4>You have not any Portofolio uploaded</h4>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

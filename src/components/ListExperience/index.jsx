@@ -8,7 +8,7 @@ export default function ListPengalaman(props) {
         {/* <div className="col-3">
           <img src={props.image} alt="" className="w-100" />
         </div> */}
-        <div className="col-12">
+        <div className="col-12 pb-3">
           <div className="position-text">{props.dataExperience.position}</div>
           <div className="text-muted">{props.dataExperience.company}</div>
           <div className="text-muted">
@@ -24,8 +24,8 @@ export default function ListPengalaman(props) {
             {" "}
             {props.dataExperience.description}
           </div>
+          <hr />
         </div>
-        <hr />
       </div>
     </div>
   );

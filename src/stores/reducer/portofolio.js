@@ -56,6 +56,54 @@ const portofolio = (state = initialState, action) => {
         message: action.payload.response.data.message,
       };
 
+    case "UPDATE_PORTOFOLIO_PENDING":
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+        message: "",
+      };
+
+    case "UPDATE_PORTOFOLIO_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        message: action.payload.data.message,
+      };
+
+    case "UPDATE_PORTOFOLIO_REJECTED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: action.payload.response.data.message,
+      };
+
+    case "DELETE_PORTOFOLIO_PENDING":
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+        message: "",
+      };
+
+    case "DELETE_PORTOFOLIO_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        message: action.payload.data.message,
+      };
+
+    case "DELETE_PORTOFOLIO_REJECTED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: action.payload.response.data.message,
+      };
+
     default: {
       return state;
     }

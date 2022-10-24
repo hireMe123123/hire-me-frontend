@@ -13,3 +13,17 @@ export const createPortofolio = (data) => {
     payload: axios.post("portfolio", data),
   };
 };
+
+export const updatePortofolio = (portofolioId, data) => {
+  return {
+    type: "UPDATE_PORTOFOLIO",
+    payload: axios.patch(`portfolio/${portofolioId}`, data),
+  };
+};
+
+export const deletePortfolio = (portofolioId) => {
+  return {
+    type: "DELETE_PORTOFOLIO",
+    payload: axios.delete(`portfolio/${portofolioId}`),
+  };
+};
