@@ -76,8 +76,8 @@ const company = (state = initialState, action) => {
     case "UPDATE_IMAGE_COMPANY_REJECTED":
       return {
         ...state,
-        isLoading: true,
-        isError: false,
+        isLoading: false,
+        isError: true,
         message: action.payload.response.data.message,
       };
     default: {
