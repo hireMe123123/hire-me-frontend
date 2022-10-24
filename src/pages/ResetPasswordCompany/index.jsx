@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import React from "react";
 import { resetPasswordCompany } from "../../stores/actions/resetPasswordCompany";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ResetPassword() {
   const navigate = useNavigate();
@@ -30,10 +32,18 @@ export default function ResetPassword() {
   const handleReset = () => {
     dispatch(resetPasswordCompany(OTPReset, form))
       .then((response) => {
-        alert(response.value.data.message);
-        navigate("/signin-company");
+        toast.success(response.value.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        setTimeout(() => {
+          navigate("/signin-company");
+        }, 3000);
       })
-      .catch((error) => alert(error.response.data.message));
+      .catch((error) =>
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        })
+      );
   };
 
   const handleChangeForm = (e) => {
@@ -97,6 +107,7 @@ export default function ResetPassword() {
                     onClick={handleReset}
                   >
                     Reset Password
+                    <ToastContainer />
                   </button>
                 </div>
               </div>

@@ -10,6 +10,8 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { forgotPasswordCompany } from "../../stores/actions/forgotPasswordCompany";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
@@ -23,9 +25,15 @@ export default function ForgotPassword() {
   const handleForgotPasswordCompany = () => {
     dispatch(forgotPasswordCompany(form))
       .then((response) => {
-        alert(response.value.data.message);
+        toast.success(response.value.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
       })
-      .catch((error) => alert(error.response.data.message));
+      .catch((error) =>
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        })
+      );
   };
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -84,6 +92,7 @@ export default function ForgotPassword() {
                     onClick={handleForgotPasswordCompany}
                   >
                     Send password reset email
+                    <ToastContainer />
                   </button>
                 </div>
               </div>

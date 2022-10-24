@@ -8,6 +8,8 @@ import {
   updateCompanyImage,
   updateDataCompany,
 } from "../../stores/actions/company";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function EditProfileCompany() {
   const dispatch = useDispatch();
@@ -32,7 +34,9 @@ export default function EditProfileCompany() {
     dispatch(updateDataCompany(dataCompany.companyId, companyData)).then(
       (response) => {
         dispatch(getDataCompanyById(dataCompany.companyId));
-        alert(response.value.data.message);
+        toast.success(response.value.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     );
   };
@@ -43,7 +47,9 @@ export default function EditProfileCompany() {
     dispatch(updateCompanyImage(dataCompany.companyId, imageData)).then(
       (response) => {
         dispatch(getDataCompanyById(dataCompany.companyId));
-        alert(response.value.data.message);
+        toast.success(response.value.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     );
   };
@@ -105,6 +111,7 @@ export default function EditProfileCompany() {
                               onClick={handleUpdateImage}
                             >
                               Save
+                              <ToastContainer />
                             </button>
                           </div>
                         ) : (
@@ -142,6 +149,7 @@ export default function EditProfileCompany() {
                         onClick={handleUpdateDataCompany}
                       >
                         Simpan
+                        <ToastContainer />
                       </button>
                       <button className="button button_base fw-bold border-purple color-purple">
                         Kembali

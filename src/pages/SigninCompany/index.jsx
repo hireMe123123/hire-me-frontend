@@ -12,6 +12,8 @@ import React from "react";
 import { loginCompany } from "../../stores/actions/signincompany";
 import { useDispatch } from "react-redux";
 import { getDataCompanyById } from "../../stores/actions/company";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Signin() {
   const navigate = useNavigate();
@@ -26,12 +28,20 @@ export default function Signin() {
   const handleLogin = () => {
     dispatch(loginCompany(form))
       .then((response) => {
-        alert(response.value.data.message);
+        toast.success(response.value.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
         dispatch(getDataCompanyById(response.value.data.data.companyId));
         localStorage.setItem("token", response.value.data.data.token);
-        navigate("/");
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
       })
-      .catch((error) => alert(error.response.data.message));
+      .catch((error) =>
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        })
+      );
   };
 
   const handleChangeForm = (e) => {
@@ -109,6 +119,7 @@ export default function Signin() {
                     onClick={handleLogin}
                   >
                     Masuk
+                    <ToastContainer />
                   </button>
                 </div>
                 <h4 className="d-flex justify-content-center account-check">

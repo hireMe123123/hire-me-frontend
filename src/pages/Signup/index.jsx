@@ -1,6 +1,8 @@
 /* IMPORT CSS */
 import "./index.css";
 import hire from "../../assets/img/hireme.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 /* IMPORT IMAGE */
 import logo from "../../assets/img/logo.png";
@@ -28,14 +30,23 @@ export default function Signup() {
   const handleSignup = () => {
     dispatch(register(form))
       .then((response) => {
-        alert(response.value.data.message);
-        navigate("/signin");
+        toast.success(response.value.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        setTimeout(() => {
+          navigate("/signin");
+        }, 3000);
       })
-      .catch((error) => alert(error.response.data.message));
+      .catch((error) =>
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        })
+      );
   };
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
   return (
     <>
       {/* START MAIN */}
@@ -129,6 +140,7 @@ export default function Signup() {
                     onClick={handleSignup}
                   >
                     Daftar
+                    <ToastContainer />
                   </button>
                 </div>
                 <h4 className="account-check d-flex justify-content-center">
