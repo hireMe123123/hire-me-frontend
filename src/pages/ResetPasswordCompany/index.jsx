@@ -12,14 +12,13 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import React from "react";
-import { resetPasswordUser } from "../../stores/actions/resetPasswordUser";
+import { resetPasswordCompany } from "../../stores/actions/resetPasswordCompany";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function ResetPassword() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { OTPReset } = useParams();
   const [form, setForm] = useState({
     newPassword: "",
     confirmPassword: "",
@@ -28,15 +27,16 @@ export default function ResetPassword() {
   const handleNavigate = (nav) => {
     navigate(`/${nav}`);
   };
+  const { OTPReset } = useParams();
 
   const handleReset = () => {
-    dispatch(resetPasswordUser(OTPReset, form))
+    dispatch(resetPasswordCompany(OTPReset, form))
       .then((response) => {
         toast.success(response.value.data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
         setTimeout(() => {
-          navigate("/signin");
+          navigate("/signin-company");
         }, 3000);
       })
       .catch((error) =>
@@ -45,6 +45,7 @@ export default function ResetPassword() {
         })
       );
   };
+
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };

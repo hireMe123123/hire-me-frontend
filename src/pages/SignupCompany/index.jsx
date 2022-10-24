@@ -11,6 +11,8 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerCompany } from "../../stores/actions/signupcompany";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SignupCompany() {
   const navigate = useNavigate();
@@ -30,10 +32,18 @@ export default function SignupCompany() {
   const handleSignupCompany = () => {
     dispatch(registerCompany(form))
       .then((response) => {
-        alert(response.value.data.message);
-        navigate("/signin-company");
+        toast.success(response.value.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        setTimeout(() => {
+          navigate("/signin-company");
+        }, 3000);
       })
-      .catch((error) => alert(error));
+      .catch((error) =>
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        })
+      );
   };
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -43,9 +53,9 @@ export default function SignupCompany() {
       {/* START MAIN */}
       <main className="container-auth-signup-company">
         <div className="row row-auth">
-          <div className="col-md-6 col-sm-12 d-flex justify-content-center align-items-center">
-            <div className="bg-image">
-              <img src={hire} alt="hire" className="hire-image" />
+          <div className="col-md-6 col-sm-12 d-flex justify-content-center align-items-center ">
+            <div className="bg-image signup__company__container">
+              <img src={hire} alt="hire" className="signup__company__banner" />
               <div className="mask"></div>
               <div className="text">
                 <p>
@@ -146,6 +156,7 @@ export default function SignupCompany() {
                     onClick={handleSignupCompany}
                   >
                     Daftar
+                    <ToastContainer />
                   </button>
                 </div>
                 <h4 className="account-check d-flex justify-content-center">

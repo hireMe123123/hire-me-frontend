@@ -3,11 +3,28 @@ import React from "react";
 import "./card.css";
 // import profilePic from "../../assets/img/profile_image_dummy.jpg";
 import pinLocation from "../../assets/img/pin__location__icon.svg";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { getDataUserById } from "../../stores/actions/user";
+import { getDataPortofolioByUserId } from "../../stores/actions/portofolio";
+import { getDataExperienceByUserId } from "../../stores/actions/experience";
+import { getDataSkillByUserId } from "../../stores/actions/skill";
 
 export default function Card(props) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate(`/user-profile`);
+    dispatch(getDataUserById(props.userId));
+    dispatch(getDataSkillByUserId(props.userId));
+    dispatch(getDataExperienceByUserId(props.userId));
+    dispatch(getDataPortofolioByUserId(props.userId));
+  };
+
   return (
     <>
-      <div className="card">
+      <div className="card" onClick={handleNavigate}>
         <div className="card__profile">
           <img
             src={

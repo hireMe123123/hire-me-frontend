@@ -15,6 +15,8 @@ import { getDataUserById } from "../../stores/actions/user";
 import { getDataExperienceByUserId } from "../../stores/actions/experience";
 import { getDataPortofolioByUserId } from "../../stores/actions/portofolio";
 import { getDataSkillByUserId } from "../../stores/actions/skill";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Signin() {
   const navigate = useNavigate();
@@ -23,21 +25,31 @@ export default function Signin() {
     email: "",
     password: "",
   });
+
   const handleNavigate = (nav) => {
     navigate(`/${nav}`);
   };
+
   const handleLogin = () => {
     dispatch(login(form))
       .then((response) => {
-        alert(response.value.data.message);
+        toast.success(response.value.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
         dispatch(getDataUserById(response.value.data.data.userId));
         dispatch(getDataSkillByUserId(response.value.data.data.userId));
         dispatch(getDataExperienceByUserId(response.value.data.data.userId));
         dispatch(getDataPortofolioByUserId(response.value.data.data.userId));
         localStorage.setItem("token", response.value.data.data.token);
-        navigate("/");
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
       })
-      .catch((error) => alert(error));
+      .catch((error) =>
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        })
+      );
   };
 
   const handleChangeForm = (e) => {
@@ -115,6 +127,7 @@ export default function Signin() {
                     onClick={handleLogin}
                   >
                     Masuk
+                    <ToastContainer />
                   </button>
                 </div>
                 <h4 className="d-flex justify-content-center account-check">

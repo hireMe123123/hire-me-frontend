@@ -84,8 +84,8 @@ const user = (state = initialState, action) => {
     case "UPDATE_DATA_USER_REJECTED":
       return {
         ...state,
-        isLoading: true,
-        isError: false,
+        isLoading: false,
+        isError: true,
         message: action.payload.response.data.message,
       };
 
@@ -108,7 +108,7 @@ const user = (state = initialState, action) => {
     case "UPDATE_IMAGE_USER_REJECTED":
       return {
         ...state,
-        isLoading: true,
+        isLoading: false,
         isError: false,
         message: action.payload.response.data.message,
       };

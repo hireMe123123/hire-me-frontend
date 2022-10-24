@@ -1,7 +1,17 @@
 .container-auth-signup-company {
   background-color: #e5e5e5;
-  height: 110vh;
+  height: 200vh;
   overflow: hidden;
+}
+
+.signup__company__banner{
+  width: 600px;
+  
+}
+
+.signup__company__container{
+  height: auto;
+  top: -150px;
 }
 
 @media (max-width: 576px) {

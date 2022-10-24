@@ -1,43 +1,33 @@
 /* IMPORT CSS */
 import "./index.css";
 import hire from "../../assets/img/hireme.png";
-/* IMPORT AXIOS */
-// import axios from "../../utils/axios";
 
 /* IMPORT IMAGE */
 import logo from "../../assets/img/logo.png";
 /* React Function */
-import { useState } from "react";
-import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import React from "react";
-import { resetPasswordUser } from "../../stores/actions/resetPasswordUser";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { forgotPasswordCompany } from "../../stores/actions/forgotPasswordCompany";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function ResetPassword() {
+export default function ForgotPassword() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { OTPReset } = useParams();
   const [form, setForm] = useState({
-    newPassword: "",
-    confirmPassword: "",
+    email: "",
   });
-
   const handleNavigate = (nav) => {
     navigate(`/${nav}`);
   };
-
-  const handleReset = () => {
-    dispatch(resetPasswordUser(OTPReset, form))
+  const handleForgotPasswordCompany = () => {
+    dispatch(forgotPasswordCompany(form))
       .then((response) => {
         toast.success(response.value.data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
-        setTimeout(() => {
-          navigate("/signin");
-        }, 3000);
       })
       .catch((error) =>
         toast.error(error.response.data.message, {
@@ -48,6 +38,7 @@ export default function ResetPassword() {
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
   return (
     <>
       {/* START MAIN */}
@@ -58,7 +49,7 @@ export default function ResetPassword() {
               <img src={hire} alt="hire" className="hire-image" />
               <div className="mask"></div>
               <div className="text">
-                <p className="text-p">
+                <p>
                   Temukan developer berbakat & terbaik di berbagai bidang
                   keahlian
                 </p>
@@ -77,35 +68,30 @@ export default function ResetPassword() {
                 />
                 <br />
                 <h1 className="container-title">Reset password</h1>
-                <p className="text-container">
-                  Ubah password untuk mengaktivikasi akun anda kembali
+                <p className="full-text text-container">
+                  Masukan email akun yang sudah terverifikasi dan kami akan
+                  mengirimkan link reset password
+                </p>
+                <p className="short-text text-container">
+                  Masukan email akun anda
                 </p>
               </div>
               <div className="auth-form">
-                <h6 className="auth-form-text">Kata sandi</h6>
+                <h6 className="auth-form-text">Email</h6>
                 <input
-                  type="password"
+                  type="email"
                   className="form-control"
-                  name="newPassword"
-                  placeholder="Masukan kata sandi"
-                  onChange={handleChangeForm}
-                />{" "}
-                <br />
-                <h6 className="auth-form-text">Konfirmasi kata sandi baru</h6>
-                <input
-                  type="password"
-                  className="form-control"
-                  name="confirmPassword"
-                  placeholder="Masukan konfirmasi kata sandi"
+                  name="email"
+                  placeholder="Masukan alamat email"
                   onChange={handleChangeForm}
                 />{" "}
                 <br />
                 <div className="d-grid">
                   <button
                     className="btn btn-warning in-button"
-                    onClick={handleReset}
+                    onClick={handleForgotPasswordCompany}
                   >
-                    Reset Password
+                    Send password reset email
                     <ToastContainer />
                   </button>
                 </div>
