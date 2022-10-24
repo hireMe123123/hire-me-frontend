@@ -33,7 +33,7 @@ export default function SignupCompany() {
         alert(response.value.data.message);
         navigate("/signin-company");
       })
-      .catch((error) => alert(error));
+      .catch((error) => alert(error.response.data.message));
   };
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -43,9 +43,9 @@ export default function SignupCompany() {
       {/* START MAIN */}
       <main className="container-auth-signup-company">
         <div className="row row-auth">
-          <div className="col-md-6 col-sm-12 d-flex justify-content-center align-items-center">
-            <div className="bg-image">
-              <img src={hire} alt="hire" className="hire-image" />
+          <div className="col-md-6 col-sm-12 d-flex justify-content-center align-items-center ">
+            <div className="bg-image signup__company__container">
+              <img src={hire} alt="hire" className="signup__company__banner" />
               <div className="mask"></div>
               <div className="text">
                 <p>

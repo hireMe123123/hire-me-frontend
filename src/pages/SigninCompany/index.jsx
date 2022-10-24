@@ -31,7 +31,7 @@ export default function Signin() {
         localStorage.setItem("token", response.value.data.data.token);
         navigate("/");
       })
-      .catch((error) => alert(error));
+      .catch((error) => alert(error.response.data.message));
   };
 
   const handleChangeForm = (e) => {

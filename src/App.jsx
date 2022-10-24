@@ -24,7 +24,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<HomePage />} />
 
         {/* PUBLIC ROUTE */}
         <Route element={<PublicRoute />}>
@@ -53,6 +52,7 @@ function App() {
 
         {/* PRIVARE ADMIN ROUTE */}
         <Route element={<PrivateRoute isAdmin={true} />}>
+          <Route path="/home" element={<HomePage />} />
           <Route path="/chat-company" element={<ChatPage />} />
           <Route path="/company-profile" element={<CompanyProfile />} />
           <Route path="/edit-company" element={<EditProfileCompany />} />
