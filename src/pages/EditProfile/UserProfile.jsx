@@ -416,7 +416,11 @@ export default function EditProfileUser() {
                             </button>
                           </div>
 
-                          <div className={`d-flex input_style gap-5`}>
+                          <div
+                            className={`${
+                              updateSkillUser ? "d-flex" : "d-none"
+                            } input_style gap-5`}
+                          >
                             <input
                               type="text"
                               id="skill"
