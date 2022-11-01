@@ -33,22 +33,8 @@ export default function EditProfileUser() {
   const userSkill = skill.loadingGet ? "" : skill.data[0].userSkill;
   const dataUser = user.data[0];
   const [userData, setUserData] = useState(dataUser);
-<<<<<<< HEAD
-  const [experience, setExperience] = useState({
-    userId: dataUser?.userId,
-    company: "",
-    position: "",
-    description: "",
-  });
-  const [portofolio, setPortofolio] = useState({
-    userId: dataUser?.userId,
-    projectName: "",
-    projectRepo: "",
-  });
-=======
   const [experience, setExperience] = useState({ userId: dataUser?.userId });
   const [portofolio, setPortofolio] = useState({ userId: dataUser?.userId });
->>>>>>> 7ea31c6f9f7d06e44c2202e1842e39d14788a0d4
   const [inputSkill, setInputSkill] = useState({
     userId: dataUser?.userId,
     skill: "",
