@@ -42,8 +42,17 @@ export default function EditProfileUser() {
   const [userData, setUserData] = useState(dataUser);
   const dataExperience = useSelector((state) => state.experience);
   const dataPortofolio = useSelector((state) => state.portofolio);
-  const [experience, setExperience] = useState({});
-  const [portofolio, setPortofolio] = useState({});
+  const [experience, setExperience] = useState({
+    userId: dataUser?.userId,
+    company: "",
+    position: "",
+    description: "",
+  });
+  const [portofolio, setPortofolio] = useState({
+    userId: dataUser?.userId,
+    projectName: "",
+    projectRepo: "",
+  });
   const [inputSkill, setInputSkill] = useState({
     userId: dataUser?.userId,
     skill: "",
@@ -190,6 +199,12 @@ export default function EditProfileUser() {
   const handleDeleteExperience = (experienceId) => {
     dispatch(deleteExperience(experienceId)).then(() => {
       dispatch(getDataExperienceByUserId(dataUser.userId));
+      setExperience({
+        userId: dataUser?.userId,
+        company: "",
+        position: "",
+        description: "",
+      });
     });
   };
 
@@ -220,6 +235,11 @@ export default function EditProfileUser() {
   const handleDeletePortofolio = (portofolioId) => {
     dispatch(deletePortfolio(portofolioId)).then(() => {
       dispatch(getDataPortofolioByUserId(dataUser.userId));
+      setPortofolio({
+        userId: dataUser?.userId,
+        projectName: "",
+        projectRepo: "",
+      });
     });
   };
 
@@ -602,9 +622,9 @@ export default function EditProfileUser() {
                                 type="text"
                                 id="company"
                                 name="company"
+                                value={experience.company}
                                 placeholder="PT Apa Saja"
                                 onChange={inputExperience}
-                                value={experience.company}
                               />
                             </div>
 
@@ -614,9 +634,9 @@ export default function EditProfileUser() {
                                 type="text"
                                 id="position"
                                 name="position"
+                                value={experience.position}
                                 placeholder="web developer"
                                 onChange={inputExperience}
-                                value={experience.position}
                               />
                             </div>
                           </div>
@@ -654,8 +674,8 @@ export default function EditProfileUser() {
                               id="description"
                               rows="5"
                               placeholder="Tuliskan deskripsi singkat"
-                              onChange={inputExperience}
                               value={experience.description}
+                              onChange={inputExperience}
                             ></textarea>
                           </div>
 
@@ -857,9 +877,9 @@ export default function EditProfileUser() {
                               type="text"
                               id="projectName"
                               name="projectName"
+                              value={portofolio.projectName}
                               placeholder="Masukkan nama aplikasi"
                               onChange={inputPortofolio}
-                              value={portofolio.projectName}
                             />
                           </div>
 
@@ -869,9 +889,9 @@ export default function EditProfileUser() {
                               type="text"
                               id="projectRepo"
                               name="projectRepo"
+                              value={portofolio.projectRepo}
                               placeholder="Masukkan link repo"
                               onChange={inputPortofolio}
-                              value={portofolio.projectRepo}
                             />
                           </div>
 
